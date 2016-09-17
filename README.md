@@ -1,4 +1,4 @@
-# cnode
+# Electron-Vue-zhihu
 
 > A Vue.js project
 

@@ -5,6 +5,7 @@
   "author": "lzhong <946317660@qq.com>",
   "private": true,
   "scripts": {
+    "start": "electron app.js",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "test": ""
@@ -43,6 +44,7 @@
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^8.3.0",
+    "vue-slider": "^1.1.1",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.4.0",

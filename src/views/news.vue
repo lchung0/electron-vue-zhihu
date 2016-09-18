@@ -1,14 +1,21 @@
 <template>
-	<ul>
-		<li v-for="item in newsList">
-			<news-box>
-				<img :src="item.images" alt="图片" slot="image">
-				<template slot="title">
-					{{item.title}}
-				</template>
-			</news-box>
-		</li>
-	</ul>
+	<div class="container">
+		<div class="slider-box">
+		
+		</div>
+		<div class="list-box">
+			<ul>
+				<li v-for="item in newsList">
+					<news-box>
+						<img :src="item.images" alt="图片" slot="image">
+						<template slot="title">
+							{{item.title}}
+						</template>
+					</news-box>
+				</li>
+			</ul>
+		</div>
+	</div>
 </template>
 <style lang="less" scoped>
 	ul{
@@ -27,7 +34,8 @@
 	export default{
 		data(){
 			return {
-				newsList: []
+				newsList: [],
+				item: []
 			}
 		},
 		components:{
@@ -38,8 +46,12 @@
 			$.get(newsUrl,data => {
 				//console.log(data)
 				this.newsList = JSON.parse(data).stories
+				this.item = JSON.parse(data).top_stories
 				for(let p of this.newsList){
 					p.images = this.changeUrl(p.images)
+				}
+				for(let p of this.item){
+					p.image = this.changeUrl(p.image)
 				}
 				
 			})

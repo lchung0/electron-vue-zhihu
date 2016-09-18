@@ -1,17 +1,27 @@
 <template>
 	<ul>
 		<li v-for="item in newsList">
-			<div>
-				<img :src="item.images" alt="">
-				{{item.title}}				
-			</div>
+			<news-box>
+				<img :src="item.images" alt="图片" slot="image">
+				<template slot="title">
+					{{item.title}}
+				</template>
+			</news-box>
 		</li>
 	</ul>
 </template>
 <style lang="less" scoped>
-	h1{
-		color: red;
+	ul{
+		list-style: none;
+		li{
+			width: 100%;
+		}
+		img{
+			width: 100%;
+			height: 100%;
+		}
 	}
+
 </style>
 <script lang="babel">
 	export default{
@@ -19,6 +29,9 @@
 			return {
 				newsList: []
 			}
+		},
+		components:{
+			'news-box': require('../components/newsBox.vue')
 		},
 		ready(){
 			var newsUrl = 'http://localhost:3333/getNews'

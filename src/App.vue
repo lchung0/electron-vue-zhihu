@@ -21,6 +21,7 @@
       display: flex;
       flex: 1 1;
       margin-left: 400px;
+      padding: 10px 20px 10px;
     }
 </style>
 <script>

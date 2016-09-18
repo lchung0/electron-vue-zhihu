@@ -6,9 +6,6 @@ var fs = require('fs')
 var app = express()
 
 app.use(function(req, res, next) {
-	req.headers.referer = 'www.zhihu.com'
-	req.headers.host = 'www.zhihu.com'
-	req.headers.origin = 'www.zhihu.com'
     res.set({
         'Access-Control-Allow-Origin': '*'
     })
@@ -42,45 +39,13 @@ app.get('/getImage',(req,res) => {
 		
 	})
 })
-var opt = {
 
-}
 app.get('/getNews',(req,res) => {
 	
 	request.get(newsUrl,(err,responce) => {
 		//date: 时间，stories:[{title,id,images:{}}]
 		res.send(responce.body)
-
-		//尝试先把图片保存，再从本地读取
-		/*fs.exists('./static/images/' + newsData.date, exists => {
-
-			if(!exists){
-
-				fs.mkdirSync('./static/images/' + newsData.date, 0755)
-				var arr = newsData.stories
-				newsData.stories.map((val,index,arr) => {
-					var img = val.images.toString()
-					var fileName = img.split('.com/')[1]
-
-					request.get(img)
-						.pipe(fs.createWriteStream('./static/images/' + newsData.date + '/' + fileName))
-						.on('close',_ => {
-							console.log(fileName + ' has downloaded')
-							console.log(this)
-						})
-				})
-				res.end()
-				
-			} else {
-				res.send(newsData)
-			}
-		})*/
 	})
-})
-
-app.get('/test',(req,res) => {
-	request.get('https:\/\/pic2.zhimg.com\/v2-ca233494720fa706735030a011fbe0b9.jpg').pipe(res)
-	//res.end()
 })
 
 module.exports = function(){

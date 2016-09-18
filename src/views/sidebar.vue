@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="bg-box" :class="{'coverbg': isLoading}" :style="{'background-image': 'url('+fileUrl+')'}">
+		<div class="bg-box" :class="{'coverbg': isLoading}" :style="{'background-image': 'url(' + fileUrl + ')'}">
 			<img v-show="isLoading" src="http://localhost:8080/static/images/loading.gif" alt="loading">
 		</div>
 	</div>
@@ -44,7 +44,8 @@
 			that.isLoading = true
 			$.get(url,data => {
 				that.isLoading = false
-				that.fileUrl = 'static/images/'+data+'.png'
+				that.fileUrl = './static/images/'+data+'.png'
+				console.log(that.fileUrl)
 			})
 			
 		}

@@ -19,7 +19,8 @@ app.get('/getImage',(req,res) => {
 	request.get(imgUrl,(err,responce) => {
 		
 		var fName = JSON.parse(responce.body).text
-		fName = fName.split("\"")[1] //获取图片名
+		//fName = fName.split("\"")[1] //获取图片名
+		fName = fName.replace(' ','_')
 
 		fs.exists('./static/images/' + fName + '.png', exists => {
 

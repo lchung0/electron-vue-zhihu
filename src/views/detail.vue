@@ -33,16 +33,25 @@
 				dataType: 'json',
 				success: data => {
 					this.detailData = data
+					setTimeout(_ => {
+						let imgList = $('img')
+						let that = this
+						for(let i = 1,len = imgList.length; i < len; i++){
+							imgList[i].src = that.changeUrl(imgList[i].src) 
+							console.log(imgList[i].src)
+						}
+					},0)
 				}
 			})
-			setTimeout(_ => {
+			//未确定放在哪里
+			/*setTimeout(_ => {
 				let imgList = $('img')
 				let that = this
 				for(let i = 1,len = imgList.length; i < len; i++){
-					imgList[i].src = that.changeUrl(imgList[i].src)
+					imgList[i].src = that.changeUrl(imgList[i].src) 
 					console.log(imgList[i].src)
 				}
-			},300)
+			},0)*/
 		},
 		methods: {
 			changeUrl(val){ //解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html

@@ -26,14 +26,6 @@ router.map({
 			}
 		}
 	}
-	/*'/': {
-		name: 'index',
-		component: require('./views/index.vue')
-	},
-	'news': {
-		name: 'news',
-		component: require('./views/news.vue')
-	}*/
 })
 
 router.start(Vue.extend({}),'#app')

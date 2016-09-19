@@ -5,7 +5,7 @@
 		</div>
 		<div class="list-box">
 			<ul>
-				<li v-for="item in newsList">
+				<li v-for="item in newsList" v-link="{name: 'detail',params: {detailId: item.id}}">
 					<news-box>
 						<img :src="item.images" alt="图片" slot="image">
 						<template slot="title">
@@ -22,6 +22,7 @@
 		list-style: none;
 		li{
 			width: 100%;
+			cursor: pointer;
 		}
 		img{
 			width: 100%;

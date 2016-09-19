@@ -13,7 +13,8 @@ app.use(function(req, res, next) {
 })
 
 var imgUrl = 'http://news-at.zhihu.com/api/4/start-image/1080*1776',
-	newsUrl = 'http://news-at.zhihu.com/api/4/news/latest'
+	newsUrl = 'http://news-at.zhihu.com/api/4/news/latest',
+	detailUrl = 'http://news-at.zhihu.com/api/4/news/'
 
 app.get('/getImage',(req,res) => {
 	request.get(imgUrl,(err,responce) => {
@@ -45,6 +46,13 @@ app.get('/getNews',(req,res) => {
 	
 	request.get(newsUrl,(err,responce) => {
 		//date: 时间，stories:[{title,id,images:{}}]
+		res.send(responce.body)
+	})
+})
+
+app.get('/getNewsDetail',(req,res) => {
+	let detailId = req.query.id //req.query可以拿到get方法参数
+	request.get(detailUrl+detailId, (err,responce) => {
 		res.send(responce.body)
 	})
 })

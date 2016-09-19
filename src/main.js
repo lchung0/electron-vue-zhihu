@@ -19,6 +19,10 @@ router.map({
 			'/news': {
 				name: 'news',
 				component: require('./views/news.vue')
+			},
+			'/detail/:detailId': {
+				name: 'detail',
+				component: require('./views/detail.vue')
 			}
 		}
 	}

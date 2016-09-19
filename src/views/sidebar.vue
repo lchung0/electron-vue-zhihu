@@ -18,6 +18,7 @@
 		width: 400px;
 		height: 100%;
 		background-size: cover;
+		transition: all 1s;
 		&.coverbg{
 			background-color: #02c4fc;
 		}

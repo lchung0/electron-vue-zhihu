@@ -3,6 +3,7 @@
 	   	<side-bar></side-bar>
     </div>
 	<div class="router-view">
+    <a type="button" @click="showMenu">菜单</a>
 		<router-view></router-view>
 	</div>
 </template>
@@ -26,8 +27,19 @@
 </style>
 <script>
     export default{
-    	components: {
+        data(){
+            return {
+                isShowMenu: false
+            }
+        },
+        components: {
     		sideBar: require('./views/sideBar.vue')
-    	}
+    	},
+        methods: {
+            showMenu(){
+                this.isShowMenu = !this.isShowMenu
+                this.$root.$broadcast('showSideMenu',this.isShowMenu)
+            }
+        }
     }
 </script>

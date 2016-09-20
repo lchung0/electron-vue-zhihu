@@ -4,6 +4,46 @@
 	</div>
 </template>
 <style lang="less">
+	.detail{
+		p{
+			text-align:left;
+			text-indent:2em;
+			padding-bottom: 10px;
+			font-size: 18px;
+		}
+		.main-wrap{
+			max-width: 650px;
+			line-height: 24px;
+			font-family: '黑体';
+		}
+		.answer{
+			hr{
+				margin: 5px 0;
+			}
+			a:hover{
+				text-decoration: underline;
+			}
+			.meta{
+				margin: 5px 0;
+				font-size: 18px;
+				font-weight: bold;
+			}
+			ul,ol{
+				padding: 0 0 0 2em;
+				li {
+					padding-left: 4px;
+					list-style: decimal;
+					font-size: 16px;
+				}
+			}
+			.content img{
+				display: inline-block;
+				margin: 0 auto;
+				max-width: 500px;
+				max-height: 350px;
+			}
+		}
+	}
 	
 </style>
 <script lang="babel">
@@ -40,6 +80,8 @@
 							imgList[i].src = that.changeUrl(imgList[i].src) 
 							console.log(imgList[i].src)
 						}
+						//设置图片居中...虽然恶心，但没想到更好的方法
+						$('.content-image').parent().css('text-align','center')
 					},0)
 				}
 			})

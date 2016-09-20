@@ -17,7 +17,7 @@
 					<div class="menu-list">
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<li class="active">
-								<div class="collapsible-header active">
+								<div class="collapsible-header active" v-link="{path: '/index'}">
 						      	首页
 							    </div>
 							    <!-- <div class="collapsible-body">

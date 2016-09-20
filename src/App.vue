@@ -2,9 +2,13 @@
     <div class="side-bar">
 	   	<side-bar></side-bar>
     </div>
-	<div class="router-view">
-    <a type="button" @click="showMenu">菜单</a>
-		<router-view></router-view>
+	<div class="main-content">
+    <div class="top-menu">
+      <top-menu></top-menu>
+    </div>
+    <div class="router-view">
+      <router-view></router-view>
+    </div>
 	</div>
 </template>
 <style lang="less" scoped>
@@ -18,28 +22,26 @@
       width: 400px;
       height: 100%;
     }
-    .router-view{
+    .main-content{
       display: flex;
+      flex-wrap: wrap;
       flex: 1 1;
       margin-left: 400px;
       padding: 10px 20px 10px;
+      .top-menu{
+        width: 100%;
+        height: 30px;
+      }
+      .router-view{
+        width: 100%;
+      }
     }
 </style>
 <script>
     export default{
-        data(){
-            return {
-                isShowMenu: false
-            }
-        },
         components: {
-    		sideBar: require('./views/sideBar.vue')
-    	},
-        methods: {
-            showMenu(){
-                this.isShowMenu = !this.isShowMenu
-                this.$root.$broadcast('showSideMenu',this.isShowMenu)
-            }
-        }
+        		sideBar: require('./views/sideBar.vue'),
+            topMenu: require('./components/topMenu.vue')
+    	  }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div class="slider-box">
-		
+			<slider-box  :img-list="imgList"></slider-box>
 		</div>
 		<div class="list-box">
 			<ul>
@@ -36,25 +36,27 @@
 		data(){
 			return {
 				newsList: [],
-				item: []
+				imgList: []
 			}
 		},
 		components:{
-			'news-box': require('../components/newsBox.vue')
+			'news-box': require('../components/newsBox.vue'),
+			'slider-box': require('../components/slider.vue')
 		},
 		ready(){
 			var newsUrl = 'http://localhost:3333/getNews'
 			$.get(newsUrl,data => {
 				//console.log(data)
 				this.newsList = JSON.parse(data).stories
-				this.item = JSON.parse(data).top_stories
+				this.imgList = JSON.parse(data).top_stories
 				for(let p of this.newsList){
 					p.images = this.changeUrl(p.images)
 				}
-				for(let p of this.item){
-					p.image = this.changeUrl(p.image)
+				for(let p of this.imgList){
+					var arr = []
+					arr.push(p.image)
+					p.image = this.changeUrl(arr)
 				}
-				
 			})
 		},
 		methods: {

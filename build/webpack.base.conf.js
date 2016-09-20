@@ -62,11 +62,15 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader!sass-loader'
       },
       {
         test: /\.less?$/,
         loader: 'style-loader!less-loader'
+      },
+      {
+        test: /\.scss?$/,
+        loader: 'style-loader!sass-loader'
       }
     ]
   },

@@ -4,6 +4,9 @@ import $ from 'jquery'
 import sidebar from './views/sideBar.vue'
 window.$ = $
 
+//require('../node_modules/materialize-css/dist/css/materialize.css')
+require('../node_modules/materialize-css/dist/js/materialize.min.js')
+
 Vue.use(vueRouter)
 
 var router = new vueRouter()

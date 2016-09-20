@@ -15,12 +15,22 @@
 						</div>
 					</div>
 					<div class="menu-list">
-						<ul>
-							<li class="menu-acitve">
-								首页
+						<ul class="collapsible popout" data-collapsible="accordion">
+							<li class="active">
+								<div class="collapsible-header active">
+						      	首页
+							    </div>
+							    <!-- <div class="collapsible-body">
+							    	<p>Lorem ipsum dolor sit amet.</p>
+							    </div> -->
 							</li>
 							<li v-for="item in menuList">
-								{{item.name}}
+								<div class="collapsible-header">
+						      	{{item.name}}
+							    </div>
+							    <div class="collapsible-body">
+							    	<p>{{item.description}}</p>
+							    </div>
 							</li>
 						</ul>
 					</div>
@@ -61,7 +71,7 @@
 			bottom: 0;
 			padding: 25px;
 			transform: translateX(-400px);
-			background: #02c4fc;
+			/* background: #02c4fc; */
 			transition: all .5s ease-in-out;
 			&.move-right{
 				transform: translateX(0);
@@ -69,7 +79,7 @@
 			.menu{
 				width: 100%;
 				height: 100%;
-				/* background: rgba(255,255,255,.5); */
+				/*background: rgba(255,255,255,.5);*/
 				.user-login{
 					position: relative;
 					width: 100%;
@@ -88,16 +98,14 @@
 				}
 				.menu-list{
 					ul{
-						list-style: none;
 						padding: 0;
 						li{
-							margin-top: 15px;
-							padding: 0 20px;
-							height: 40px;
-							line-height: 40px;
-							border-radius: 8px;
-							background: rgba(255,255,255,.4);
-							box-shadow: 3px 3px 10px rgba(0,0,0,.4)
+							box-shadow: 3px 3px 10px rgba(0,0,0,.5);
+							div{
+								background: #fff;
+								border: none;
+								border-top: 1px solid #eee;
+							}
 						}
 					}
 				}

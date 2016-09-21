@@ -65,6 +65,13 @@ app.get('/getMenu', (req,res) => {
 	})
 })
 
+app.get('/getThemeDetail',(req,res) => {
+	let themeId = req.query.id
+	request.get(themeDetail + themeId,(err,responce) => {
+		res.send(responce.body)
+	})
+})
+
 module.exports = function(){
 	app.listen(3333,_ => {
 		console.log("node is listening at port 3333")

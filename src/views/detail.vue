@@ -16,17 +16,23 @@
 			line-height: 24px;
 			font-family: '黑体';
 		}
+		.meta{
+				margin: 5px 0;
+				font-size: 18px;
+				font-weight: bold;
+		}
+		.content img{
+			display: inline-block;
+			margin: 0 auto;
+			max-width: 500px;
+			max-height: 350px;
+		}
 		.answer{
 			hr{
 				margin: 5px 0;
 			}
 			a:hover{
 				text-decoration: underline;
-			}
-			.meta{
-				margin: 5px 0;
-				font-size: 18px;
-				font-weight: bold;
 			}
 			ul,ol{
 				padding: 0 0 0 2em;
@@ -36,11 +42,8 @@
 					font-size: 16px;
 				}
 			}
-			.content img{
-				display: inline-block;
-				margin: 0 auto;
-				max-width: 500px;
-				max-height: 350px;
+			article h2{
+				font-size: 20px;
 			}
 		}
 	}
@@ -78,7 +81,6 @@
 						let that = this
 						for(let i = 1,len = imgList.length; i < len; i++){
 							imgList[i].src = that.changeUrl(imgList[i].src) 
-							console.log(imgList[i].src)
 						}
 						//设置图片居中...虽然恶心，但没想到更好的方法
 						$('.content-image').parent().css('text-align','center')

@@ -26,6 +26,10 @@ router.map({
 			'/detail/:detailId': {
 				name: 'detail',
 				component: require('./views/detail.vue')
+			},
+			'/theme/:themeId': {
+				name: 'theme',
+				component: require('./views/theme.vue')
 			}
 		}
 	}

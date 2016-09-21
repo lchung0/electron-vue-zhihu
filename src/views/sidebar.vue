@@ -18,15 +18,12 @@
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<li class="active">
 								<div class="collapsible-header active" v-link="{path: '/index'}">
-						      	首页
+						      		首页
 							    </div>
-							    <!-- <div class="collapsible-body">
-							    	<p>Lorem ipsum dolor sit amet.</p>
-							    </div> -->
 							</li>
 							<li v-for="item in menuList">
-								<div class="collapsible-header">
-						      	{{item.name}}
+								<div class="collapsible-header" v-link="{name: 'theme', params:{themeId: item.id}}">
+						      		{{item.name}}
 							    </div>
 							    <div class="collapsible-body">
 							    	<p>{{item.description}}</p>

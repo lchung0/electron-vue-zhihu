@@ -10,6 +10,7 @@ function createWindow(){
 	//express
 	express()
 	win = new BrowserWindow({
+		frame: false,
 		width: 1300,
 		height: 800
 	})

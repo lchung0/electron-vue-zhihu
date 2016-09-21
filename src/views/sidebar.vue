@@ -17,12 +17,12 @@
 					<div class="menu-list">
 						<ul class="collapsible popout" data-collapsible="accordion">
 							<li class="active">
-								<div class="collapsible-header active" v-link="{path: '/index'}">
+								<div class="collapsible-header active waves-effect" v-link="{path: '/index'}">
 						      		首页
 							    </div>
 							</li>
 							<li v-for="item in menuList">
-								<div class="collapsible-header" v-link="{name: 'theme', params:{themeId: item.id}}">
+								<div class="collapsible-header waves-effect" v-link="{name: 'theme', params:{themeId: item.id}}">
 						      		{{item.name}}
 							    </div>
 							    <div class="collapsible-body">
@@ -94,6 +94,10 @@
 					}
 				}
 				.menu-list{
+					.collapsible-header{
+						font-size: 16px;
+						font-weight: bold;
+					}
 					ul{
 						padding: 0;
 						li{

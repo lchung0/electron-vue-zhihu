@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container waves-effect">
 		<div class="image-box">
 			<slot name="image"></slot>
 		</div>

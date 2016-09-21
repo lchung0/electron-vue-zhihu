@@ -1,7 +1,7 @@
 <template>
 	<div class="list-box">
 		<ul>
-			<li v-for="item in themeDetail" v-link="{name: 'detail',params: {detailId: item.id}}">
+			<li v-for="item in themeDetail" v-link="{name: 'detail',params: {detailId: item.id}}" >
 				<news-box>
 					<img :src="item.images" alt="图片" slot="image" v-if="item.images">
 					<template slot="title">

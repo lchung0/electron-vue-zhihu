@@ -98,6 +98,13 @@
 						font-size: 16px;
 						font-weight: bold;
 					}
+					.collapsible-body{
+						p{
+							white-space: nowrap;
+							text-overflow: ellipsis;
+							overflow: hidden;
+						}
+					}
 					ul{
 						padding: 0;
 						li{

@@ -16,7 +16,7 @@ function createWindow(){
 	})
 
 	win.loadURL('http://localhost:8080/#!/index')
-	
+	//win.loadURL('file://' + __dirname + '/dist/index.html')
 	win.webContents.openDevTools()
 
 	win.on('closed', () => {

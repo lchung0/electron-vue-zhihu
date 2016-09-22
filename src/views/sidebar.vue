@@ -2,12 +2,12 @@
 	<div class="container">
 		<div class="bg-box" :class="{'coverbg': isLoading}" :style="{'background-image': 'url(' + fileUrl + ')'}">
 			<!-- :style="{'background-image': 'url(' + fileUrl + ')'}" -->
-			<img v-show="isLoading" class="loading" src="http://localhost:8080/static/images/loading.gif" alt="loading">
+			<img v-show="isLoading" class="loading" src="../../dist/static/images/loading.gif" alt="loading">
 			<div class="mask">
 				<div class="menu">
 					<div class="user-login">
 						<div class="avatar">
-							<img src="http://localhost:8080/static/images/avatar.jpg" alt="用户头像">
+							<img src="../../dist/static/images/avatar.jpg" alt="用户头像">
 							<span>请登录</span>
 						</div>
 						<div class="login-bar">

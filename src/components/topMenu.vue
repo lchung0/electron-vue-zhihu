@@ -1,5 +1,5 @@
 <template>
-	<i class="menu-icon" alt="" @click="showMenu" alt="菜单"></i>
+	<i class="menu-icon waves-effect" alt="" @click="showMenu" alt="菜单"></i>
 </template>
 <style lang="less" scoped>
 	.menu-icon{

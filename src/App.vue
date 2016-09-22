@@ -29,10 +29,13 @@
       margin-left: 400px;
       padding: 10px 20px 10px;
       .top-menu{
+        position: fixed;
+        top: 0;
         width: 100%;
         height: 30px;
       }
       .router-view{
+        margin-top: 30px;
         width: 100%;
       }
     }

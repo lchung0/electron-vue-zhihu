@@ -8,7 +8,8 @@
     "start": "electron app.js",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "package": "asar pack MyFirstApp-win32-x64/resources/app MyFirstApp-win32-x64/resources/app.asar"
+    "package": "electron-packager ./ zhihu-daily --platform=win32 --arch=x64 --out ./ --version 1.4.0 --overwrite asar=true",
+    "package-asar": "asar pack ./app app.asar"
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
@@ -26,6 +27,7 @@
     "babel-preset-stage-2": "^6.0.0",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.23.1",
+    "electron-packager": "^8.0.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",

@@ -40,6 +40,7 @@
 			return {
 				newsList: [],
 				imgList: [],
+				modalData: {},
 				loading: false
 			}
 		},
@@ -56,22 +57,18 @@
 				//console.log(data)
 				this.newsList = JSON.parse(data).stories
 				this.imgList = JSON.parse(data).top_stories
-				// for(let p of this.newsList){
-				// 	p.images = this.changeUrl(p.images)
-				// }
-				// for(let p of this.imgList){
-				// 	var arr = []
-				// 	arr.push(p.image)
-				// 	console.log(typeof(p.image))
-				// 	p.image = this.changeUrl(arr)
-				// }
 				this.loading = false
 			})
 		},
+		events:{
+			callModal(data){
+
+			}
+		},
 		methods: {
-			// changeUrl(val){ //解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html
-			// 	return val[0].replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
-			// }
+			showModal(id){
+
+			}
 		},
 		filters: {
 			changeUrl(val){

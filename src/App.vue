@@ -28,7 +28,6 @@
       flex: 1 1;
       margin-left: 400px;
       padding: 10px 20px 10px;
-      overflow: hidden;
       .top-menu{
         position: fixed;
         top: 0;

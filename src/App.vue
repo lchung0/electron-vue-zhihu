@@ -28,14 +28,17 @@
       flex: 1 1;
       margin-left: 400px;
       padding: 10px 20px 10px;
+      overflow: hidden;
       .top-menu{
         position: fixed;
         top: 0;
+        padding-top: 10px;
         width: 100%;
-        height: 30px;
+        height: 40px;
       }
       .router-view{
-        margin-top: 30px;
+        position: relative;
+        margin-top: 40px;
         width: 100%;
       }
     }

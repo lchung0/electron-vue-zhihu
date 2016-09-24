@@ -1,7 +1,6 @@
 <template>
 	<div class="container">
 		<div class="bg-box" :class="{'coverbg': isLoading}" :style="{'background-image': 'url(' + fileUrl + ')'}">
-			<!-- :style="{'background-image': 'url(' + fileUrl + ')'}" -->
 			<img v-show="isLoading" class="loading" src="../../dist/static/images/loading.gif" alt="loading">
 			<div class="mask">
 				<div class="menu">

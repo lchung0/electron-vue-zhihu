@@ -2,7 +2,13 @@ import Vue from 'vue'
 import vueRouter from 'vue-router'
 import $ from 'jquery'
 import sidebar from './views/sideBar.vue'
+
 window.$ = $
+$(window).on('keydown', event => {
+	event.preventDefault()
+	if(event.keyCode === 116)
+		location.reload()
+})
 
 require('../node_modules/materialize-css/dist/js/materialize.min.js')
 

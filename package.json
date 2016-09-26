@@ -9,7 +9,7 @@
     "start": "electron app.js",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "package": "electron-packager ./ zhihu-daily --ignore=node_modules/electron-* --platform=win32 --arch=x64 --out ./ --version 1.4.0 --overwrite asar=true",
+    "package": "electron-packager ./app zhihu-daily --ignore=node_modules/electron-* --platform=win32 --arch=x64 --out ./ --version 1.4.0 --overwrite asar=true",
     "package-asar": "asar pack ./app app.asar"
   },
   "dependencies": {
@@ -17,7 +17,8 @@
     "electron": "^1.4.0",
     "jquery": "^3.1.0",
     "vue": "^1.0.21",
-    "vue-router": "^0.7.13"
+    "vue-router": "^0.7.13",
+    "express": "^4.13.3"
   },
   "devDependencies": {
     "asar": "^0.12.3",
@@ -30,7 +31,6 @@
     "css-loader": "^0.23.1",
     "electron-packager": "^8.0.0",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.4",
     "function-bind": "^1.0.2",

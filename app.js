@@ -15,8 +15,8 @@ function createWindow(){
 		height: 800
 	})
 
-	win.loadURL('http://localhost:8080/#!/index')
-	//win.loadURL('file://' + __dirname + '/dist/index.html')
+	//win.loadURL('http://localhost:8080/#!/index') //生产环境
+	win.loadURL('file://' + __dirname + '/dist/index.html') //正式环境
 	
 	win.webContents.openDevTools()
 

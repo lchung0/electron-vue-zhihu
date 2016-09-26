@@ -13,6 +13,7 @@
 	</div>
 </template>
 <style lang="less" scoped>
+    @import 'assets/css/materialize.min.css';
     .side-bar{
       display: flex;
       position: fixed;

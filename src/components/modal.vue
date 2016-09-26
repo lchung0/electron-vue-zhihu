@@ -41,6 +41,7 @@
 		},
 		events:{
 			showModal(data){
+				console.log('receive')
 				this.isShowModal = true
 				$('.modal-box').show(300)
 				this.modalData = data.data

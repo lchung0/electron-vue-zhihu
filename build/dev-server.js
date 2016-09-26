@@ -52,12 +52,6 @@ app.use(devMiddleware)
 // compilation error display
 app.use(hotMiddleware)
 
-app.use('/#!/getImage',function(req,res){
-  var url = 'http://news-at.zhihu.com/api/4/start-image/1080*1776'
-  console.log(123)
-  res.send('getImage')
-})
-
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))

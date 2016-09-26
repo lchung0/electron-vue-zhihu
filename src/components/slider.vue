@@ -10,6 +10,9 @@
 <style lang="less">
 	.carousel{
 		height: 300px;
+		.carousel-item{
+			cursor: pointer;
+		}
 	}
 </style>
 <script lang="babel">
@@ -28,6 +31,7 @@
 		},
 		methods: {
 			showModal(id){
+				console.log('click')
 				var getDetailUrl = 'http://localhost:3333/getNewsDetail'
 				$.get(getDetailUrl,{id: id}, data => {
 					this.$root.$broadcast('showModal',{data: JSON.parse(data)})

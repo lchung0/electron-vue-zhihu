@@ -2,6 +2,7 @@ var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   entry: {
@@ -62,18 +63,19 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loader: 'style-loader!css-loader!sass-loader'
+        loader: 'style-loader!css-loader'
       },
       {
         test: /\.less?$/,
         loader: 'style-loader!less-loader'
-      },
-      {
-        test: /\.scss?$/,
-        loader: 'style-loader!sass-loader'
       }
     ]
   },
+  // plugins:[
+  //   new ExtractTextPlugin("[name].css",{
+  //         allChunks: true
+  //       })
+  // ],
   vue: {
     loaders: utils.cssLoaders()
   }

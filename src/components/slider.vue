@@ -1,7 +1,7 @@
 <template>
 	<div class="carousel">
 		<template v-for="(index,item) in imgList">
-			<a class="carousel-item" :href="javascript;">
+			<a class="carousel-item" @click="showModal(item.id)" :href="javascript;">
 				<img :src="item.image | changeUrl">
 			</a>
 		</template>
@@ -21,16 +21,18 @@
 				required: true
 			}
 		},
-		data(){
-			return {
-
-			}
-		},
 		ready(){
 			setTimeout(_ => {
 				$('.carousel').carousel()
-				console.log(this.imgList)
 			},1000)
+		},
+		methods: {
+			showModal(id){
+				var getDetailUrl = 'http://localhost:3333/getNewsDetail'
+				$.get(getDetailUrl,{id: id}, data => {
+					this.$root.$broadcast('showModal',{data: JSON.parse(data)})
+				})
+			}
 		},
 		filters: {
 			changeUrl(val){

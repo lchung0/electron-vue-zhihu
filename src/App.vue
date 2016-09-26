@@ -3,6 +3,7 @@
 	   	<side-bar></side-bar>
     </div>
 	<div class="main-content">
+    <modal-component></modal-component>
     <div class="top-menu">
       <top-menu></top-menu>
     </div>
@@ -25,6 +26,7 @@
     .main-content{
       display: flex;
       flex-wrap: wrap;
+      position: relative;
       flex: 1 1;
       margin-left: 400px;
       padding: 10px 20px 10px;
@@ -46,7 +48,8 @@
     export default{
         components: {
         		sideBar: require('./views/sideBar.vue'),
-            topMenu: require('./components/topMenu.vue')
+            topMenu: require('./components/topMenu.vue'),
+            modalComponent: require('./components/modal.vue')
     	  }
     }
 </script>

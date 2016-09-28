@@ -23,6 +23,7 @@
       flex: 0 0 400px;
       width: 400px;
       height: 100%;
+      box-shadow: 5px 0 10px rgba(0,0,0,0.5);
     }
     .main-content{
       display: flex;
@@ -34,6 +35,7 @@
       .top-menu{
         position: fixed;
         top: 0;
+        z-index: 999;
         padding-top: 10px;
         width: 100%;
         height: 40px;

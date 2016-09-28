@@ -65,16 +65,17 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
-			padding: 25px;
 			transform: translateX(-400px);
 			/* background: #02c4fc; */
 			transition: all .5s ease-in-out;
+			background: rgba(0,0,0,0.3);
 			&.move-right{
 				transform: translateX(0);
 			}
 			.menu{
 				width: 100%;
 				height: 100%;
+				padding: 25px;
 				/*background: rgba(255,255,255,.5);*/
 				.user-login{
 					position: relative;

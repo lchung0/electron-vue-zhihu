@@ -14,7 +14,7 @@
 		left: 0;
 		bottom: 0;
 		padding: 40px;
-		z-index: 1000;
+		z-index: 3000;
 		overflow: hidden;
 		background: rgba(0,0,0,0.5);
 		box-shadow: 0px 5px 100px rgba(0,0,0,.5);

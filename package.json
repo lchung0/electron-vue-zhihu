@@ -15,11 +15,11 @@
   "dependencies": {
     "babel-runtime": "^6.0.0",
     "electron": "^1.4.0",
-    "jquery": "^3.1.0",
-    "vue": "^1.0.21",
-    "vue-router": "^0.7.13",
     "express": "^4.13.3",
-    "request": "^2.74.0"
+    "jquery": "^3.1.0",
+    "request": "^2.74.0",
+    "vue": "^1.0.21",
+    "vue-router": "^0.7.13"
   },
   "devDependencies": {
     "asar": "^0.12.3",
@@ -41,9 +41,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "materialize-css": "^0.97.7",
-    "node-sass": "^3.10.0",
     "ora": "^0.2.0",
-    "sass-loader": "^4.0.2",
     "shelljs": "^0.6.0",
     "style-loader": "^0.13.1",
     "underscore-contrib": "^0.3.0",

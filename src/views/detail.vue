@@ -12,6 +12,7 @@
 			font-size: 18px;
 		}
 		.main-wrap{
+			margin: 0 auto;
 			max-width: 650px;
 			line-height: 24px;
 			font-family: '黑体';

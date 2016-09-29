@@ -31,19 +31,24 @@
       position: relative;
       flex: 1 1;
       margin-left: 400px;
-      padding: 10px 20px 10px;
+      padding: 10px 0 10px 35px;
+      overflow: hidden;
       .top-menu{
         position: fixed;
         top: 0;
+        left: 400px;
         z-index: 999;
-        padding-top: 10px;
+        padding: 0 0 0 35px;
         width: 100%;
-        height: 40px;
+        height: 45px;
+        line-height: 40px;
+        box-shadow: 5px 0 10px rgba(0,0,0,0.5);
       }
       .router-view{
         position: relative;
         margin-top: 40px;
         width: 100%;
+        overflow: auto;
       }
     }
 </style>

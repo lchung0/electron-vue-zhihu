@@ -1,15 +1,27 @@
 <template>
-	<i class="menu-icon waves-effect" alt="" @click="showMenu" alt="菜单"></i>
+	<div class="menu-content">
+		<i class="icon menu-icon waves-effect" @click="showMenu" alt="菜单"></i>
+		<i class="icon home-icon waves-effect" v-link="{path: '/index'}"></i>
+		<i class="icon back-icon waves-effect" @click="back()"></i>
+	</div>
 </template>
 <style lang="less" scoped>
-	.menu-icon{
-		display: inline-block;
-		width: 30px;
-		height: 30px;
-		background-image: url('../assets/icon/menu.svg');
-		background-size: cover;
-		transition: all .5s;
+	.menu-content{
+		width: 100%;
+		.icon{
+			display: inline-block;
+			width: 28px;
+			height: 28px;
+			transition: all .5s;
+			background-size: cover;
+			&:not(:first-child){
+				margin-left: 25px;
+			}
+		}
 	}
+	.menu-icon{ background-image: url('../assets/icon/menu.svg'); }
+	.home-icon{ background-image: url('../assets/icon/home.svg'); }
+	.back-icon{ background-image: url('../assets/icon/back.svg'); }
 </style>
 <script lang="babel">
 	export default{

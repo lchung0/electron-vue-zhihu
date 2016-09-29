@@ -18,6 +18,7 @@
 <style lang="less" scoped>
 	.list-box{
 		ul{
+			margin-left: 15%;
 			list-style: none;
 			li{
 				width: 60%;

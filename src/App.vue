@@ -47,6 +47,7 @@
       .router-view{
         position: relative;
         margin-top: 40px;
+        padding-bottom: 40px;
         width: 100%;
         overflow: auto;
       }

@@ -1,6 +1,9 @@
 <template>
 	<div class="container">
 		<a class="menu-btn btn-floating waves-effect waves-light red"><i class="material-icons">X</i></a>
+		<div class="content">
+			
+		</div>
 	</div>
 </template>
 <style lang="less" scoped>
@@ -14,7 +17,6 @@
 			top: 10px;
 			width: 50px;
 			height: 50px;
-			border-radius: 50%;
 			background: red;
 		}
 	}

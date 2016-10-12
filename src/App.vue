@@ -1,64 +1,52 @@
 <template>
+    <div class="bg-img bg-fixed" :style="{'background-image': 'url(' + fileUrl + ')'}"></div>
     <div class="side-bar">
-	   	<side-bar></side-bar>
+      <side-bar></side-bar>
     </div>
-	<div class="main-content">
-    <modal-component></modal-component>
-    <div class="top-menu">
-      <top-menu></top-menu>
-    </div>
-    <div class="router-view">
-      <router-view></router-view>
-    </div>
-	</div>
 </template>
 <style lang="less" scoped>
-    @import 'assets/css/materialize.min.css';
-    .side-bar{
-      display: flex;
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      flex: 0 0 400px;
-      width: 400px;
-      height: 100%;
-      box-shadow: 5px 0 10px rgba(0,0,0,0.5);
+    @import '../node_modules/materialize-css/dist/css/materialize.min.css';
+
+    .bg-img{
+        width: 400px;
+        background-size: cover;
     }
-    .main-content{
-      display: flex;
-      flex-wrap: wrap;
-      position: relative;
-      flex: 1 1;
-      margin-left: 400px;
-      padding: 10px 0 10px 35px;
-      overflow: hidden;
-      .top-menu{
+    .bg-fixed{
         position: fixed;
         top: 0;
-        left: 400px;
-        z-index: 999;
-        padding: 0 0 0 35px;
-        width: 100%;
-        height: 45px;
-        line-height: 40px;
-        box-shadow: 5px 0 10px rgba(0,0,0,0.5);
-      }
-      .router-view{
-        position: relative;
-        margin-top: 40px;
-        padding-bottom: 40px;
-        width: 100%;
-        overflow: auto;
-      }
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+    .side-bar{
+        width: 400px;
+        height: 100%;
     }
 </style>
-<script>
+<script lang="babel">
     export default{
-        components: {
-        		sideBar: require('./views/sideBar.vue'),
-            topMenu: require('./components/topMenu.vue'),
-            modalComponent: require('./components/modal.vue')
-    	  }
+        data(){
+            return {
+                isLoading: false,
+                fileUrl: '',
+                menuList: []
+            }
+        },
+        ready(){
+            var that = this
+            var imgUrl = 'http://localhost:3333/getImage',
+                menuUrl = 'http://localhost:3333/getMenu'
+            that.isLoading = true
+            $.get(imgUrl, data => {
+                that.isLoading = false
+                that.fileUrl = './static/images/'+data+'.png'
+            })
+            $.get(menuUrl, data => {
+                that.menuList = JSON.parse(data).others
+            })
+        },
+        components:{
+            sideBar: require('./components/sideBar.vue')
+        }
     }
 </script>

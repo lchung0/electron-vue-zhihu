@@ -3,6 +3,7 @@ import vueRouter from 'vue-router'
 import $ from 'jquery'
 
 window.$ = $
+
 $(window).on('keydown', event => {
 	event.preventDefault()
 	if(event.keyCode === 116)
@@ -10,7 +11,6 @@ $(window).on('keydown', event => {
 })
 
 require('../node_modules/materialize-css/dist/js/materialize.min.js')
-
 Vue.use(vueRouter)
 
 var router = new vueRouter()
@@ -19,7 +19,10 @@ router.map({
 	'/':{
 		component: require('./App.vue'),
 		subRoutes: {
-			
+			'main':{
+				name: 'main',
+				component: require('./views/mainPage.vue')
+			}
 		}
 	}
 })

@@ -1,12 +1,14 @@
 <template>
     <div class="bg-img bg-fixed" :style="{'background-image': 'url(' + fileUrl + ')'}"></div>
     <div class="side-bar">
-      <side-bar></side-bar>
+      <side-bar :menu-list="menuList"></side-bar>
+    </div>
+    <div class="router-view">
+        <router-view></router-view>
     </div>
 </template>
 <style lang="less" scoped>
     @import '../node_modules/materialize-css/dist/css/materialize.min.css';
-
     .bg-img{
         width: 400px;
         background-size: cover;
@@ -19,8 +21,12 @@
         z-index: -1;
     }
     .side-bar{
+        flex: 0 400px;
         width: 400px;
         height: 100%;
+    }
+    .router-view{
+        flex: 1;
     }
 </style>
 <script lang="babel">

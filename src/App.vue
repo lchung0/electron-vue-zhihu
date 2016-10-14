@@ -9,6 +9,7 @@
 </template>
 <style lang="less" scoped>
     @import '../node_modules/materialize-css/dist/css/materialize.min.css';
+    @import './assets/fonts/iconfont.css';
     .bg-img{
         width: 400px;
         background-size: cover;
@@ -26,7 +27,9 @@
         height: 100%;
     }
     .router-view{
+        left: 400px;
         flex: 1;
+        overflow: auto;
     }
 </style>
 <script lang="babel">
@@ -45,7 +48,7 @@
             that.isLoading = true
             $.get(imgUrl, data => {
                 that.isLoading = false
-                that.fileUrl = './static/images/'+data+'.png'
+                that.fileUrl = './static/images/' + data + '.png'
             })
             $.get(menuUrl, data => {
                 that.menuList = JSON.parse(data).others

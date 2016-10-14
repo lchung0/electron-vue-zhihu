@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<a class="menu-btn btn-floating waves-effect waves-light red" @click="isShowMenu=!isShowMenu"><i class="menu-icon">菜单</i></a>
+		<a class="menu-btn btn-floating waves-effect waves-light black" @click="isShowMenu=!isShowMenu"><i class="menu-icon iconfont icon-nav"></i></a>
 		<div class="content" :class="{'go-left': !isShowMenu}">
 			<div class="avatar-box">
 				<img class="avatar" src="../../static/images/avatar.jpg" alt="头像">
@@ -34,7 +34,7 @@
 				width: 100%;
 				height: 100%;
 				line-height: 50px;
-				font-size: 16px;
+				font-size: 22px;
 				font-style: normal;
 				text-align: center;
 			}
@@ -63,6 +63,7 @@
 			}
 			.menu-list{
 				position: absolute;
+				padding-left: 15px;
 				top: 30%;
 				text-align: center;
 			}

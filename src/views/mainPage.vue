@@ -1,17 +1,33 @@
 <template>
-	<div class="container">
-		<ul>
-			<li v-for="(index,item) in newsList">
-				<article-box :news-item="item"></article-box>
-			</li>
-		</ul>
+	<div class="container-box">
+		<div class="article-list">
+			<ul>
+				<li v-for="(index,item) in newsList" @click="showDetail(item.id)">
+					<article-box :news-item="item" :news-date="newsDate"></article-box>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="article-detail" v-if="hasLoadedDetail">
+		<article-detail :detail-data="detailData"></article-detail>
 	</div>
 </template>
 <style lang="less" scoped>
-	.container{
+	.hide-box{
+		opacity: 0 !important;
+	}
+	.container-box{
+		position: relative;
+		display: flex;
+		justify: flex-start;
+		flex-wrap: nowrap;
 		width: 100%;
 		height: 100%;
 		padding: 20px;
+		overflow: auto;
+		.article-list{
+			opacity: 1;
+		}
 		ul{
 			display: flex;
 			flex-wrap: wrap;
@@ -20,7 +36,19 @@
 				margin: 10px 10px 0 0;
 			}
 		}
-		
+	}
+	.article-detail,
+	.article-list{
+		transition: all .5s;
+	}
+	.article-detail{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 1;
+		z-index: 3000;
 	}
 </style>
 <script lang="babel">
@@ -29,21 +57,60 @@
 			return {
 				newsList: [],
 				imgList: [],
-				loading: false
+				newsDate: '',
+				detailData: {},
+				loading: false,
+				hasLoadedDetail: false
 			}
 		},
 		ready(){
-			var newsUrl = 'http://localhost:3333/getNews'
+			let newsUrl = 'http://localhost:3333/getNews'
 			this.loading = true
 			$.get(newsUrl,data => {
 				//console.log(data)
+				this.newsDate = JSON.parse(data).date
 				this.newsList = JSON.parse(data).stories
+				this.newsList.push({'title': '......','images':[]})
 				this.imgList = JSON.parse(data).top_stories
 				this.loading = false
 			})
 		},
+		watch:{
+			hasLoadedDetail(val){
+				if(val){
+					$('.article-list').addClass('hide-box')
+					setTimeout(_ => {
+						$('.article-detail').removeClass('hide-box')
+					},700)
+					//$('.container-box').addClass('hide')
+				} else {
+					$('.article-list').removeClass('hide-box')
+					$('.article-detail').addClass('hide-box')
+				}
+			}
+		},
+		methods:{
+			showDetail(id){
+				this.hasLoadedDetail = false
+				$.ajax({
+					url: 'http://localhost:3333/getNewsDetail',
+					method: 'get',
+					data: {'id': id},
+					dataType: 'json',
+					success: data => {
+						let that = this
+						this.detailData = data
+						setTimeout(_ => {
+							
+							that.hasLoadedDetail = true
+						},0)
+					}
+				})
+			}
+		},
 		components: {
-			articleBox: require('../components/articleBox.vue')
+			articleBox: require('../components/articleBox.vue'),
+			articleDetail: require('../components/articleDetail.vue')
 		}
 	}
 </script>

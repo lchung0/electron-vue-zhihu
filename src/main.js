@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import vueRouter from 'vue-router'
-import $ from 'jquery'
 
-window.$ = $
+window.$ = window.jQuery = require('jquery')
+require('../node_modules/materialize-css/dist/js/materialize.min.js')
 
 $(window).on('keydown', event => {
 	event.preventDefault()
@@ -10,7 +10,6 @@ $(window).on('keydown', event => {
 		location.reload()
 })
 
-require('../node_modules/materialize-css/dist/js/materialize.min.js')
 Vue.use(vueRouter)
 
 var router = new vueRouter()
@@ -19,9 +18,13 @@ router.map({
 	'/':{
 		component: require('./App.vue'),
 		subRoutes: {
-			'main':{
+			'main': {
 				name: 'main',
 				component: require('./views/mainPage.vue')
+			},
+			'test': {
+				name: 'test',
+				component: require('./views/test.vue')
 			}
 		}
 	}

@@ -3,8 +3,7 @@
 		<div class="autor-box">
 			
 		</div>
-		<div class="content-box">
-			{{{detailData.body}}}
+		<div class="content-box" v-html="detailData.body">
 		</div>
 	</div>
 </template>
@@ -86,14 +85,16 @@
 				}
 			}
 		},
-		ready(){
-			let imgList = $('.detail-container img')
-			console.log(imgList)
-			for(let i = 0,len = imgList.length; i < len; i++){
-				imgList[i].src = this.changeUrl(imgList[i].src) 
-			}
-			//设置图片居中...
-			$('.content-image').parent().css('text-align','center')
+		mounted(){
+			this.$nextTick(_ => {
+				let imgList = $('.detail-container img')
+				console.log(imgList)
+				for(let i = 0,len = imgList.length; i < len; i++){
+					imgList[i].src = this.changeUrl(imgList[i].src) 
+				}
+				//设置图片居中...
+				$('.content-image').parent().css('text-align','center')
+			})
 		},
 		methods: {
 			changeUrl(val){ 

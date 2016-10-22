@@ -18,7 +18,7 @@ function createWindow(){
 	win.loadURL('http://localhost:8080/#!/main') //生产环境
 	//win.loadURL('file://' + __dirname + '/dist/index.html') //正式环境
 	
-	//win.webContents.openDevTools()
+	win.webContents.openDevTools()
 
 	win.on('closed', () => {
 		win = null

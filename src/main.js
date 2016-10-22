@@ -12,21 +12,23 @@ $(window).on('keydown', event => {
 
 Vue.use(vueRouter)
 
-var router = new vueRouter()
-
-router.map({
-	'/':{
+let routes = [
+	{
+		path: '/',
 		component: require('./App.vue'),
-		subRoutes: {
-			'main': {
-				name: 'main',
+		children: [
+			{
+				path: 'main',
 				component: require('./views/mainPage.vue')
-			},
-			'test': {
-				name: 'test',
-				component: require('./views/test.vue')
 			}
-		}
+		]
 	}
+	
+]
+
+var router = new vueRouter({routes: routes})
+
+new Vue({
+  el: '#app',
+  router: router
 })
-router.start(Vue.extend({}),'#app')

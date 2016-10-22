@@ -1,10 +1,12 @@
 <template>
-    <div class="bg-img bg-fixed" :style="{'background-image': 'url(' + fileUrl + ')'}"></div>
-    <div class="side-bar">
-      <side-bar :menu-list="menuList"></side-bar>
-    </div>
-    <div class="router-view">
-        <router-view></router-view>
+    <div class="app">
+        <div class="bg-img bg-fixed" :style="{'background-image': 'url(' + fileUrl + ')'}"></div>
+        <div class="side-bar">
+          <side-bar :menu-list="menuList"></side-bar>
+        </div>
+        <div class="router-view">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 <style lang="less" scoped>
@@ -41,17 +43,19 @@
                 menuList: []
             }
         },
-        ready(){
-            var that = this
-            var imgUrl = 'http://localhost:3333/getImage',
-                menuUrl = 'http://localhost:3333/getMenu'
-            that.isLoading = true
-            $.get(imgUrl, data => {
-                that.isLoading = false
-                that.fileUrl = './static/images/' + data + '.png'
-            })
-            $.get(menuUrl, data => {
-                that.menuList = JSON.parse(data).others
+        mounted(){
+            this.$nextTick(_ => {
+                var that = this
+                var imgUrl = 'http://localhost:3333/getImage',
+                    menuUrl = 'http://localhost:3333/getMenu'
+                that.isLoading = true
+                $.get(imgUrl, data => {
+                    that.isLoading = false
+                    that.fileUrl = './static/images/' + data + '.png'
+                })
+                $.get(menuUrl, data => {
+                    that.menuList = JSON.parse(data).others
+                })
             })
         },
         components:{

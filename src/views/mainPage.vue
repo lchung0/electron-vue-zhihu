@@ -1,15 +1,17 @@
 <template>
-	<div class="container-box">
-		<div class="article-list">
-			<ul>
-				<li v-for="(index,item) in newsList" @click="showDetail(item.id)">
-					<article-box :news-item="item" :news-date="newsDate"></article-box>
-				</li>
-			</ul>
+	<div class="main-page">
+		<div class="container-box">
+			<div class="article-list">
+				<ul>
+					<li v-for="(item,index) in newsList" @click="showDetail(item.id)">
+						<article-box :news-item="item" :news-date="newsDate"></article-box>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
-	<div class="article-detail" v-if="hasLoadedDetail">
-		<article-detail :detail-data="detailData"></article-detail>
+		<div class="article-detail" v-if="hasLoadedDetail">
+			<article-detail :detail-data="detailData"></article-detail>
+		</div>
 	</div>
 </template>
 <style lang="less" scoped>
@@ -63,16 +65,18 @@
 				hasLoadedDetail: false
 			}
 		},
-		ready(){
-			let newsUrl = 'http://localhost:3333/getNews'
-			this.loading = true
-			$.get(newsUrl,data => {
-				//console.log(data)
-				this.newsDate = JSON.parse(data).date
-				this.newsList = JSON.parse(data).stories
-				this.newsList.push({'title': '......','images':[]})
-				this.imgList = JSON.parse(data).top_stories
-				this.loading = false
+		mounted(){
+			this.$nextTick(_ => {
+				let newsUrl = 'http://localhost:3333/getNews'
+				this.loading = true
+				$.get(newsUrl,data => {
+					//console.log(data)
+					this.newsDate = JSON.parse(data).date
+					this.newsList = JSON.parse(data).stories
+					this.newsList.push({'title': '......','images':[]})
+					this.imgList = JSON.parse(data).top_stories
+					this.loading = false
+				})
 			})
 		},
 		watch:{

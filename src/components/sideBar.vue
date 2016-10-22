@@ -10,7 +10,7 @@
 			</div>
 			<div class="menu-list">
 				<ul>
-				    <li v-for="(index,item) in menuList">
+				    <li v-for="(item,index) in menuList">
 						<a class="btn-floating waves-effect waves-light btn-large">{{item.name}}</a>
 					</li>
 				</ul>
@@ -97,9 +97,6 @@
 			return {
 				isShowMenu: false
 			}
-		},
-		ready(){
-
 		},
 		methods:{
 			showMenu(){

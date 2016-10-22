@@ -7,7 +7,7 @@
 	     	<div class="indeterminate"></div>
 	  	</div>
 		<div class="img-box" v-show="newsItem.images.length">
-			<img :src="newsItem.images | changeUrl" alt="">
+			<img :src="formatedUrl(newsItem.images)" alt="">
 		</div>
 		<div class="bottom-box" v-show="newsItem.title!=='......'">
 			<i class="iconfont icon-time"></i><span class="date">{{newsDate | formatTime}}</span>
@@ -102,17 +102,16 @@
 				isShowDetail: false
 			}
 		},
-		ready(){
-			
-		},
-		filters: {
-			changeUrl(val){
+		methods: {
+			formatedUrl: function(val){
 				if(val.length <= 0) return ''
 				if(typeof(val)==='string')
 					return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 				else 
 					return val[0].replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
-			},
+			}
+		},
+		filters: {
 			formatTime(val){
 				let year = val.slice(0,4)
 				let mon = val.slice(4,6)

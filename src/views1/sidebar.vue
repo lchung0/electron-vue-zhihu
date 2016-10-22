@@ -135,18 +135,20 @@
 				isShowMenu ? $('.mask').addClass('move-right') : $('.mask').removeClass('move-right')
 			}
 		},
-		ready(){
-			var that = this
-			var imgUrl = 'http://localhost:3333/getImage',
-				menuUrl = 'http://localhost:3333/getMenu'
-			that.isLoading = true
-			$.get(imgUrl, data => {
-				that.isLoading = false
-				that.fileUrl = './static/images/'+data+'.png'
-				console.log(that.fileUrl)
-			})
-			$.get(menuUrl, data => {
-				that.menuList = JSON.parse(data).others
+		mounted(){
+			this.$nextTick(_ => {
+				var that = this
+				var imgUrl = 'http://localhost:3333/getImage',
+					menuUrl = 'http://localhost:3333/getMenu'
+				that.isLoading = true
+				$.get(imgUrl, data => {
+					that.isLoading = false
+					that.fileUrl = './static/images/'+data+'.png'
+					console.log(that.fileUrl)
+				})
+				$.get(menuUrl, data => {
+					that.menuList = JSON.parse(data).others
+				})
 			})
 		}
 	}

@@ -4,14 +4,17 @@
 	</template>
 	<div class="list-box">
 		<ul>
-			<li v-for="item in themeDetail" v-link="{name: 'detail',params: {detailId: item.id}}" >
-				<news-box>
-					<img :src="item.images | changeUrl" alt="图片" slot="image" v-if="item.images">
-					<template slot="title">
-						{{item.title}}
-					</template>
-				</news-box>
-			</li>
+			<router-link to="{name: 'detail',params:{detailId: item.id}}">
+				<li v-for="item in themeDetail" >
+					
+					<news-box>
+						<img :src="formatedUrl(item.images)" alt="图片" slot="image" v-if="item.images">
+						<template slot="title">
+							{{item.title}}
+						</template>
+					</news-box>
+				</li>
+			</router-link>
 		</ul>
 	</div>
 </template>
@@ -49,32 +52,31 @@
 				transition.next({
 					themeId: transition.to.params.themeId
 				})
-			},
-			canReuse: transition => {
-		      	return false
-		    }
+			}
 		},
-		ready(){
-			var that = this
-			var themeDetailUrl = 'http://localhost:3333/getThemeDetail'
-			this.loading = true
-			$.ajax({
-				url: themeDetailUrl,
-				method: 'get',
-				data: {'id': this.themeId},
-				success: data => {
-					this.themeDetail = JSON.parse(data).stories
-					that.loading = false
-				}
-			})
-		},
-		filters: {
-			changeUrl(val){
+		computed: {
+			formatedUrl(val){
 				if(typeof(val)==='string')
 					return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 				else 
 					return val[0].replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 			}
+		},
+		mounted(){
+			this.$nextTick(_ => {
+				var that = this
+				var themeDetailUrl = 'http://localhost:3333/getThemeDetail'
+				this.loading = true
+				$.ajax({
+					url: themeDetailUrl,
+					method: 'get',
+					data: {'id': this.themeId},
+					success: data => {
+						this.themeDetail = JSON.parse(data).stories
+						that.loading = false
+					}
+				})
+			})
 		}
 	}
 </script>

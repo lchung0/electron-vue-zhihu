@@ -65,6 +65,12 @@
 				hasLoadedDetail: false
 			}
 		},
+		created(){
+			eventHandler.$on('closedetail',data => {
+				this.closeDetail()
+				eventHandler.$emit('closeProgressBar',data)
+			})
+		},
 		mounted(){
 			this.$nextTick(_ => {
 				let newsUrl = 'http://localhost:3333/getNews'
@@ -86,7 +92,6 @@
 					setTimeout(_ => {
 						$('.article-detail').removeClass('hide-box')
 					},700)
-					//$('.container-box').addClass('hide')
 				} else {
 					$('.article-list').removeClass('hide-box')
 					$('.article-detail').addClass('hide-box')
@@ -105,11 +110,13 @@
 						let that = this
 						this.detailData = data
 						setTimeout(_ => {
-							
 							that.hasLoadedDetail = true
 						},0)
 					}
 				})
+			},
+			closeDetail(){
+				this.hasLoadedDetail = false
 			}
 		},
 		components: {

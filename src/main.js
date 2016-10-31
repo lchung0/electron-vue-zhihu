@@ -8,7 +8,9 @@ $(window).on('keydown', event => {
 	event.preventDefault()
 	if(event.keyCode === 116)
 		location.reload()
-})
+})//全局响应F5刷新
+let eventHandler = new Vue() //vue2.0,代替$broadcast响应事件传递
+window.eventHandler = eventHandler
 
 Vue.use(vueRouter)
 
@@ -26,7 +28,7 @@ let routes = [
 	
 ]
 
-var router = new vueRouter({routes: routes})
+let router = new vueRouter({routes: routes})
 
 new Vue({
   el: '#app',

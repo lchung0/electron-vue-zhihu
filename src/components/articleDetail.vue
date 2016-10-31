@@ -3,7 +3,12 @@
 		<div class="autor-box">
 			
 		</div>
-		<div class="content-box" v-html="detailData.body">
+		<div class="content-box">
+			<a class="close-btn btn-floating waves-effect waves-light red" v-on:click="closeDetail(detailData.id)">
+				<i class="iconfont icon-close"></i>
+			</a>
+			<div v-html="detailData.body">
+			</div>
 		</div>
 	</div>
 </template>
@@ -19,11 +24,19 @@
 			height: 100%;
 			min-width: 400px;
 			background: transparent;
+			border-right: 1px solid #eee;
 		}
 		.content-box{
 			flex: 1 100%;
+			position: relative;
 			margin-left: 400px;
 			min-width: 600px;
+			/*max-width: 1000px;*/
+			.close-btn{
+				position: fixed;
+				top: 20px;
+				right: 100px;
+			}
 			h2{
 				font-size: 34px;
 				font-weight: bold;
@@ -97,6 +110,9 @@
 			})
 		},
 		methods: {
+			closeDetail(id){
+				eventHandler.$emit('closedetail',{id: id})
+			},
 			changeUrl(val){ 
 				//解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html
 				return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')

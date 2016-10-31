@@ -1,9 +1,9 @@
 <template>
-	<div class="article-box active" @click="isShowDetail=!isShowDetail">
+	<div class="article-box active" @click="showDetail(newsItem.id)" :id="newsItem.id">
 		<p class="title">
 			{{newsItem.title}}
 		</p>
-		<div class="progress" v-show="isShowDetail">
+		<div class="progress" style="opacity:0;">
 	     	<div class="indeterminate"></div>
 	  	</div>
 		<div class="img-box" v-show="newsItem.images.length">
@@ -97,13 +97,16 @@
 				default: ''
 			}
 		},
-		data(){
-			return {
-				isShowDetail: false
-			}
+		created(){
+			eventHandler.$on('closeProgressBar',data => {
+				$('#' + data.id + ' .progress').css('opacity','0')
+			})
 		},
 		methods: {
-			formatedUrl: function(val){
+			showDetail(id){
+				$('#' + id + ' .progress').css('opacity','1')
+			},
+			formatedUrl(val){
 				if(val.length <= 0) return ''
 				if(typeof(val)==='string')
 					return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')

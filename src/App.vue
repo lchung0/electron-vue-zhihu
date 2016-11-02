@@ -50,6 +50,7 @@
                     menuUrl = 'http://localhost:3333/getMenu'
                 that.isLoading = true
                 $.get(imgUrl, data => {
+                    //let otherData = 'Mitko_Pigoff'
                     that.isLoading = false
                     that.fileUrl = './static/images/' + data + '.png'
                 })

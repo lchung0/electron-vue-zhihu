@@ -14,10 +14,15 @@
 </template>
 <style lang="less">
 	.detail-container{
-		position: relative;
 		display: flex;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 		width: auto;
 		height: 100%;
+		z-index: 3000;
 		.autor-box{
 			position: fixed;
 			flex: 0 400px;
@@ -89,27 +94,60 @@
 </style>
 <script lang="babel">
 	export default{
-		props: {
-			detailData: {
-				type: Object,
-				require: true,
-				default(){
-					return {}
-				}
+		data(){
+			return {
+				detailData: {}
 			}
 		},
+		created(){
+			eventHandler.$on('sendNewsData', detailData => {
+				this.detailData = detailData				
+			}) //接收事件需在发送事件前面，否则接收不了
+			eventHandler.$emit('getNewsDetail')
+			if(!this.detailData.body) this.getNewsDetail(this.$route.params.id)
+		},
 		mounted(){
-			this.$nextTick(_ => {
-				let imgList = $('.detail-container img')
-				console.log(imgList)
-				for(let i = 0,len = imgList.length; i < len; i++){
-					imgList[i].src = this.changeUrl(imgList[i].src) 
-				}
-				//设置图片居中...
-				$('.content-image').parent().css('text-align','center')
-			})
+			$('img').length > 1 && this.animateImg()
+			$('.detail-container img').length && this.setImgUrl()
 		},
 		methods: {
+			animateImg(){
+				// 图片加载完成之后动画效果出现
+				$('img').each(function(){
+					$(this).hide()
+					$(this).load(function(){
+						console.log('finished')
+						$(this).show(500)
+					})
+				})
+			},
+			setImgUrl(){
+				let imgList = $('.detail-container img')
+				let that = this
+				imgList.each(function() {
+					$(this).attr('src',that.changeUrl($(this).attr('src')))
+				})
+				//设置图片居中...
+				$('.content-image').parent().css('text-align','center')
+			},
+			getNewsDetail(id){
+				let re = /(src=\")\S*\"/ //匹配src字符串，准备替换
+				$.ajax({
+					url: 'http://localhost:3333/getNewsDetail',
+					method: 'get',
+					data: {'id': id},
+					dataType: 'json',
+					success: data => {
+						this.detailData = data
+						console.log(data.body)
+						console.warn(data.body.match(re))
+						setTimeout(_ =>{
+							this.animateImg()
+							this.setImgUrl()
+						},50)
+					}
+				})
+			},
 			closeDetail(id){
 				eventHandler.$emit('closedetail',{id: id})
 			},

@@ -102,6 +102,14 @@
 				$('#' + data.id + ' .progress').css('opacity','0')
 			})
 		},
+		mounted(){
+			$('img').each(function(){
+				$(this).hide()
+				$(this).load(function(){
+					$(this).fadeIn()
+				})
+			})
+		},
 		methods: {
 			showDetail(id){
 				$('#' + id + ' .progress').css('opacity','1')

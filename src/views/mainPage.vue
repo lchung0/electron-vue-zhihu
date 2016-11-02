@@ -9,9 +9,9 @@
 				</ul>
 			</div>
 		</div>
-		<div class="article-detail" v-if="hasLoadedDetail">
+		<!-- <div class="article-detail" v-if="hasLoadedDetail">
 			<article-detail :detail-data="detailData"></article-detail>
-		</div>
+		</div> -->
 	</div>
 </template>
 <style lang="less" scoped>
@@ -43,15 +43,7 @@
 	.article-list{
 		transition: all .5s;
 	}
-	.article-detail{
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		opacity: 1;
-		z-index: 3000;
-	}
+	
 </style>
 <script lang="babel">
 	export default{
@@ -70,6 +62,9 @@
 				this.closeDetail()
 				eventHandler.$emit('closeProgressBar',data)
 			})
+			eventHandler.$on('getNewsDetail',_ => {
+				eventHandler.$emit('sendNewsData',this.detailData)
+			})
 		},
 		mounted(){
 			this.$nextTick(_ => {
@@ -85,6 +80,7 @@
 				})
 			})
 		},
+
 		watch:{
 			hasLoadedDetail(val){
 				if(val){
@@ -100,6 +96,7 @@
 		},
 		methods:{
 			showDetail(id){
+				console.log('showDetail')
 				this.hasLoadedDetail = false
 				$.ajax({
 					url: 'http://localhost:3333/getNewsDetail',
@@ -109,9 +106,8 @@
 					success: data => {
 						let that = this
 						this.detailData = data
-						setTimeout(_ => {
-							that.hasLoadedDetail = true
-						},0)
+						this.hasLoadedDetail = true
+						this.$router.push('article/' + id)
 					}
 				})
 			},

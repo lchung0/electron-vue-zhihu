@@ -9,9 +9,6 @@
 				</ul>
 			</div>
 		</div>
-		<!-- <div class="article-detail" v-if="hasLoadedDetail">
-			<article-detail :detail-data="detailData"></article-detail>
-		</div> -->
 	</div>
 </template>
 <style lang="less" scoped>
@@ -54,14 +51,9 @@
 				newsDate: '',
 				detailData: {},
 				loading: false,
-				hasLoadedDetail: false
 			}
 		},
 		created(){
-			eventHandler.$on('closedetail',data => {
-				this.closeDetail()
-				eventHandler.$emit('closeProgressBar',data)
-			})
 			eventHandler.$on('getNewsDetail',_ => {
 				eventHandler.$emit('sendNewsData',this.detailData)
 			})
@@ -80,24 +72,17 @@
 				})
 			})
 		},
-
-		watch:{
-			hasLoadedDetail(val){
-				if(val){
-					$('.article-list').addClass('hide-box')
-					setTimeout(_ => {
-						$('.article-detail').removeClass('hide-box')
-					},700)
-				} else {
-					$('.article-list').removeClass('hide-box')
-					$('.article-detail').addClass('hide-box')
-				}
-			}
-		},
 		methods:{
+			setImgUrl(str){
+				let re = /(src=\")\S*\"/g //匹配src字符串
+				let that = this
+				let newStr = str.replace(re,function(data){
+					let targetStr = data.split('\"')
+					return "src=\"" + that.changeUrl(targetStr[1]) + "\""
+				})
+				return newStr
+			},
 			showDetail(id){
-				console.log('showDetail')
-				this.hasLoadedDetail = false
 				$.ajax({
 					url: 'http://localhost:3333/getNewsDetail',
 					method: 'get',
@@ -105,14 +90,15 @@
 					dataType: 'json',
 					success: data => {
 						let that = this
+						data.body = this.setImgUrl(data.body)
 						this.detailData = data
-						this.hasLoadedDetail = true
 						this.$router.push('article/' + id)
 					}
 				})
 			},
-			closeDetail(){
-				this.hasLoadedDetail = false
+			changeUrl(val){ 
+				//解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html
+				return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 			}
 		},
 		components: {

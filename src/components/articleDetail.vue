@@ -4,10 +4,10 @@
 			
 		</div>
 		<div class="content-box">
-			<a class="close-btn btn-floating waves-effect waves-light red" v-on:click="closeDetail(detailData.id)">
+			<a class="close-btn btn-floating waves-effect waves-light red" v-on:click="closeDetail()">
 				<i class="iconfont icon-close"></i>
 			</a>
-			<div v-html="detailData.body">
+			<div v-html="contentData">
 			</div>
 		</div>
 	</div>
@@ -96,15 +96,16 @@
 	export default{
 		data(){
 			return {
-				detailData: {}
+				contentData: '',
+				totalData: {}
 			}
 		},
 		created(){
-			eventHandler.$on('sendNewsData', detailData => {
-				this.detailData = detailData				
+			eventHandler.$on('sendNewsData', totalData => {
+				this.contentData = totalData.body				
 			}) //接收事件需在发送事件前面，否则接收不了
 			eventHandler.$emit('getNewsDetail')
-			if(!this.detailData.body) this.getNewsDetail(this.$route.params.id)
+			if(!this.contentData) this.getNewsDetail(this.$route.params.id)
 		},
 		mounted(){
 			$('img').length > 1 && this.animateImg()
@@ -121,35 +122,35 @@
 					})
 				})
 			},
-			setImgUrl(){
-				let imgList = $('.detail-container img')
+			setImgUrl(str){
+				let re = /(src=\")\S*\"/g //匹配src字符串
 				let that = this
-				imgList.each(function() {
-					$(this).attr('src',that.changeUrl($(this).attr('src')))
+				let newStr = str.replace(re,function(data){
+					let targetStr = data.split('\"')
+					return "src=\"" + that.changeUrl(targetStr[1]) + "\""
 				})
-				//设置图片居中...
-				$('.content-image').parent().css('text-align','center')
+				return newStr
 			},
 			getNewsDetail(id){
-				let re = /(src=\")\S*\"/ //匹配src字符串，准备替换
 				$.ajax({
 					url: 'http://localhost:3333/getNewsDetail',
 					method: 'get',
 					data: {'id': id},
 					dataType: 'json',
 					success: data => {
-						this.detailData = data
-						console.log(data.body)
-						console.warn(data.body.match(re))
+						this.totalData = data
+						this.contentData = this.setImgUrl(data.body)
+						
 						setTimeout(_ =>{
+							//设置图片居中...
+							$('.content-image').parent().css('text-align','center')
 							this.animateImg()
-							this.setImgUrl()
 						},50)
 					}
 				})
 			},
 			closeDetail(id){
-				eventHandler.$emit('closedetail',{id: id})
+				this.$router.push('/main')
 			},
 			changeUrl(val){ 
 				//解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html

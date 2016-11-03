@@ -50,9 +50,9 @@
                     menuUrl = 'http://localhost:3333/getMenu'
                 that.isLoading = true
                 $.get(imgUrl, data => {
-                    //let otherData = 'Mitko_Pigoff'
+                    let otherData = 'Mitko_Pigoff'
                     that.isLoading = false
-                    that.fileUrl = './static/images/' + data + '.png'
+                    that.fileUrl = './static/images/' + otherData + '.png'
                 })
                 $.get(menuUrl, data => {
                     that.menuList = JSON.parse(data).others

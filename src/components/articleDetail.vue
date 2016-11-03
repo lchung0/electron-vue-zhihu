@@ -1,7 +1,7 @@
 <template>
 	<div class="detail-container">
-		<div class="autor-box">
-			
+		<div class="author-box">
+			<author-component :extra-data="totalData.extra"></author-component>
 		</div>
 		<div class="content-box">
 			<a class="close-btn btn-floating waves-effect waves-light red" v-on:click="closeDetail()">
@@ -23,13 +23,24 @@
 		width: auto;
 		height: 100%;
 		z-index: 3000;
-		.autor-box{
+		.author-box{
 			position: fixed;
 			flex: 0 400px;
 			height: 100%;
 			min-width: 400px;
-			background: transparent;
+			width: 400px;
+			overflow: auto;
+			background: #fff;
 			border-right: 1px solid #eee;
+			&::-webkit-scrollbar-thumb,
+			&::-webkit-scrollbar-button{
+				background: transparent;
+			}
+			&:hover{
+				&::-webkit-scrollbar-thumb{
+					background: #eee;
+				}
+			}
 		}
 		.content-box{
 			flex: 1 100%;
@@ -101,11 +112,16 @@
 			}
 		},
 		created(){
+			//接收事件需在发送事件前面，否则接收不了
 			eventHandler.$on('sendNewsData', totalData => {
+				this.totalData = totalData
 				this.contentData = totalData.body				
-			}) //接收事件需在发送事件前面，否则接收不了
+			})
 			eventHandler.$emit('getNewsDetail')
-			if(!this.contentData) this.getNewsDetail(this.$route.params.id)
+			//如果直接在页面点击刷新，则根据路由id重新获取内容
+			if(!this.contentData) 
+				this.getNewsDetail(this.$route.params.id)
+
 		},
 		mounted(){
 			$('img').length > 1 && this.animateImg()
@@ -117,7 +133,6 @@
 				$('img').each(function(){
 					$(this).hide()
 					$(this).load(function(){
-						console.log('finished')
 						$(this).show(500)
 					})
 				})
@@ -138,9 +153,12 @@
 					data: {'id': id},
 					dataType: 'json',
 					success: data => {
+						for(let i = 0,len = data.extra.comments.length;i < len ;i++){
+							data.extra.comments[i].avatar = this.changeUrl(data.extra.comments[i].avatar)
+						}
+						data.extra.image = this.changeUrl(data.extra.image)
 						this.totalData = data
 						this.contentData = this.setImgUrl(data.body)
-						
 						setTimeout(_ =>{
 							//设置图片居中...
 							$('.content-image').parent().css('text-align','center')
@@ -151,11 +169,15 @@
 			},
 			closeDetail(id){
 				this.$router.push('/main')
+				location.reload()
 			},
 			changeUrl(val){ 
 				//解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html
 				return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 			}
+		},
+		components: {
+			authorComponent: require('./authorBox.vue')
 		}
 	}
 </script>

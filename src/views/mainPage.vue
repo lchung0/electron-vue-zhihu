@@ -74,6 +74,10 @@
 		},
 		methods:{
 			setImgUrl(str){
+				if(!str) {
+					alert('setImgUrl str 为空')
+					return ''
+				}
 				let re = /(src=\")\S*\"/g //匹配src字符串
 				let that = this
 				let newStr = str.replace(re,function(data){
@@ -89,8 +93,12 @@
 					data: {'id': id},
 					dataType: 'json',
 					success: data => {
-						let that = this
+						if(!data) return
 						data.body = this.setImgUrl(data.body)
+						for(let i = 0,len = data.extra.comments.length;i < len ;i++){
+							data.extra.comments[i].avatar = this.changeUrl(data.extra.comments[i].avatar)
+						}
+						data.extra.image = this.changeUrl(data.extra.image)
 						this.detailData = data
 						this.$router.push('article/' + id)
 					}

@@ -11,7 +11,8 @@
 			<div class="menu-list">
 				<ul>
 				    <li v-for="(item,index) in menuList">
-						<a class="btn-floating waves-effect waves-light btn-large">{{item.name}}</a>
+				    	<i class="circle-icon"></i>
+						<a class="menu-item waves-effect waves-light" href="javascript:;">{{item.name}}</a>
 					</li>
 				</ul>
 			</div>
@@ -21,7 +22,7 @@
 <style lang="less" scoped>
 	.container{
 		position: fixed;
-		width: 400px;
+		width: 350px;
 		height: 100%;
 		.menu-btn{
 			position: absolute;
@@ -44,41 +45,62 @@
 			width: 100%;
 			height: 100%;
 			transition: all .5s ease-in-out;
+			background: #212121;
 			&.go-left{
 				transform: translateX(-400px);
 			}
 			.avatar-box{
 				position: absolute;
 				width: 100%;
-				top: 20%;
+				top: 10%;
 				text-align: center;
 			}
 			.btn-group{
-				display: inline-block;
 				width: 100%;
 				text-align: center;
 			}
 			.avatar{
+				display: inline-block !important;
 				border-radius: 50%;
 			}
 			.menu-list{
+				padding: 0 60px;
+				width: 100%;
 				position: absolute;
-				padding-left: 15px;
-				top: 30%;
+				top: 20%;
 				text-align: center;
+				ul li{
+					position: relative;
+					&:hover{
+						.circle-icon{
+							opacity: 1;
+						}
+					}
+				}
 			}
-			li{
-				float: left;
+			.circle-icon{
+				position: absolute;
+				top: 20px;
 				display: inline-block;
-				margin-left: 40px;
-				margin-top: 20px;
-				width: 70px;
-				height: 70px;
-				text-align: center;
-				.btn-large{
-					width: 100%;
-					height: 100%;
-					line-height: 70px;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: #fff;
+				opacity: 0;
+				transition: all .5s;
+			}
+			.menu-item{
+				display: inline-block;
+				margin-top: 10px;
+				padding: 5px;
+				width: 100%;
+				height: 40px;
+				color: #fff;
+				font-size: 18px;
+				border-bottom: 1px solid transparent;
+				transition: all .5s;
+				&:hover{
+					border-bottom: 1px solid #eee;
 				}
 			}
 		}

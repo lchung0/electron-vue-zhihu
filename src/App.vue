@@ -13,7 +13,7 @@
     @import '../node_modules/materialize-css/dist/css/materialize.min.css';
     @import './assets/fonts/iconfont.css';
     .bg-img{
-        width: 400px;
+        width: 350px;
         background-size: cover;
     }
     .bg-fixed{
@@ -24,12 +24,12 @@
         z-index: -1;
     }
     .side-bar{
-        flex: 0 400px;
-        width: 400px;
+        flex: 0 350px;
+        width: 350px;
         height: 100%;
     }
     .router-view{
-        left: 400px;
+        left: 350px;
         flex: 1;
         overflow: auto;
     }
@@ -52,7 +52,7 @@
                 $.get(imgUrl, data => {
                     let otherData = 'Mitko_Pigoff'
                     that.isLoading = false
-                    that.fileUrl = './static/images/' + otherData + '.png'
+                    that.fileUrl = './static/images/' + data + '.png'
                 })
                 $.get(menuUrl, data => {
                     that.menuList = JSON.parse(data).others

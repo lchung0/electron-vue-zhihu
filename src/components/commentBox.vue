@@ -9,7 +9,9 @@
 			{{commentData.content}}
 		</div>
 		<div class="bottom-box">
-			<span class="likes" v-show="commentData.likes">赞同：{{commentData.likes}}</span>
+			<span class="likes" v-show="commentData.likes >=0">
+				<i class="iconfont icon-appreciate"></i> {{commentData.likes}}
+			</span>
 		</div>
 	</div>
 </template>

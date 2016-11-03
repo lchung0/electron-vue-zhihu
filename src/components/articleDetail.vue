@@ -25,13 +25,14 @@
 		z-index: 3000;
 		.author-box{
 			position: fixed;
-			flex: 0 400px;
+			flex: 0 350px;
 			height: 100%;
-			min-width: 400px;
-			width: 400px;
+			min-width: 350px;
+			width: 350px;
 			overflow: auto;
-			background: #fff;
+			background: #fafafa;
 			border-right: 1px solid #eee;
+			box-shadow: 5px 0 20px rgba(0,0,0,.1);
 			&::-webkit-scrollbar-thumb,
 			&::-webkit-scrollbar-button{
 				background: transparent;
@@ -45,7 +46,7 @@
 		.content-box{
 			flex: 1 100%;
 			position: relative;
-			margin-left: 400px;
+			margin-left: 350px;
 			min-width: 600px;
 			/*max-width: 1000px;*/
 			.close-btn{

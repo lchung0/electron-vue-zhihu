@@ -4,8 +4,8 @@
 		<div class="header-box">
 			<p class="title">{{extraData.title}}</p>
 			<div class="bottom">
-				<span class="popularity">点赞：{{extraData.popularity}}</span>
-				<span class="comment-numbers">评论数：{{extraData.short_comments}}</span>
+				<span class="popularity"><i class="iconfont icon-likefill"></i> {{extraData.popularity}}</span>
+				<span class="comment-numbers"><i class="iconfont icon-liuyan"></i> {{extraData.short_comments}}</span>
 			</div>
 		</div>
 		<div class="comment-box">
@@ -38,6 +38,9 @@
 			bottom: 5px;
 			right: 15px;
 			text-align: right;
+			.icon-likefill{
+				color: #ef5350;
+			}
 		}
 	}
 </style>

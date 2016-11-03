@@ -46,7 +46,6 @@ app.get('/getImage',(req,res) => {
 })
 
 app.get('/getNews',(req,res) => {
-	
 	request.get(newsUrl,(err,responce) => {
 		//date: 时间，stories:[{title,id,images:{}}]
 		res.send(responce.body)
@@ -84,7 +83,7 @@ app.get('/getMenu', (req,res) => {
 app.get('/getThemeDetail',(req,res) => {
 	let themeId = req.query.id
 	request.get(themeDetail + themeId,(err,responce) => {
-		res.send(responce.body)
+		res.send(JSON.parse(responce.body))
 	})
 })
 

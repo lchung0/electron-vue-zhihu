@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<a class="menu-btn btn-floating waves-effect waves-light black" @click="isShowMenu=!isShowMenu"><i class="menu-icon iconfont icon-nav"></i></a>
+		<a class="menu-btn btn-floating waves-effect waves-light black" @click="isShowMenu=!isShowMenu"><i class="menu-icon iconfont" :class="{'icon-nav': isShowMenu === false,'icon-close': isShowMenu === true}"></i></a>
 		<div class="content" :class="{'go-left': !isShowMenu}">
 			<div class="avatar-box">
 				<img class="avatar" src="../../static/images/avatar.jpg" alt="头像">
@@ -12,7 +12,10 @@
 				<ul>
 				    <li v-for="(item,index) in menuList">
 				    	<i class="circle-icon"></i>
-						<a class="menu-item waves-effect waves-light" href="javascript:;">{{item.name}}</a>
+						<a class="menu-item waves-effect waves-light" href="javascript:;"
+						   @click="getThemeData(item.id)">
+						   {{item.name}}
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -121,7 +124,9 @@
 			}
 		},
 		methods:{
-			showMenu(){
+			getThemeData(id){
+				console.log(id)
+				this.$router.push('theme/' + id)
 			}
 		}
 	}

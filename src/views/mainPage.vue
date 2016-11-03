@@ -60,16 +60,33 @@
 		},
 		mounted(){
 			this.$nextTick(_ => {
-				let newsUrl = 'http://localhost:3333/getNews'
+				let newsUrl = ''
 				this.loading = true
-				$.get(newsUrl,data => {
-					//console.log(data)
-					this.newsDate = JSON.parse(data).date
-					this.newsList = JSON.parse(data).stories
-					this.newsList.push({'title': '......','images':[]})
-					this.imgList = JSON.parse(data).top_stories
-					this.loading = false
-				})
+				if(this.$route.fullPath.indexOf('theme') >= 0){
+					newsUrl = 'http://localhost:3333/getThemeDetail'
+					$.ajax({
+						url: newsUrl,
+						type: 'get',
+						data: {
+							id: this.$route.params.id
+						},
+						success: data => {
+							this.newsList = data.stories.slice(1,data.stories.length)
+							console.log(data)
+							this.loading = false
+						}
+					})
+				}else{
+				    newsUrl = 'http://localhost:3333/getNews'
+				    $.get(newsUrl,data => {
+						this.newsDate = JSON.parse(data).date
+						this.newsList = JSON.parse(data).stories
+						this.newsList.push({'title': '......','images':[]})
+						this.imgList = JSON.parse(data).top_stories
+						this.loading = false
+					})
+				}
+				
 			})
 		},
 		methods:{
@@ -98,9 +115,9 @@
 						for(let i = 0,len = data.extra.comments.length;i < len ;i++){
 							data.extra.comments[i].avatar = this.changeUrl(data.extra.comments[i].avatar)
 						}
-						data.extra.image = this.changeUrl(data.extra.image)
+						data.extra.image && (data.extra.image = this.changeUrl(data.extra.image))
 						this.detailData = data
-						this.$router.push('article/' + id)
+						this.$router.push('/article/' + id)
 					}
 				})
 			},

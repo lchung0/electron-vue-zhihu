@@ -6,10 +6,10 @@
 		<div class="progress" style="opacity:0;">
 	     	<div class="indeterminate"></div>
 	  	</div>
-		<div class="img-box" v-show="newsItem.images.length">
+		<div class="img-box" v-show="newsItem.images && newsItem.images.length">
 			<img :src="formatedUrl(newsItem.images)" alt="">
 		</div>
-		<div class="bottom-box" v-show="newsItem.title!=='......'">
+		<div class="bottom-box" v-show="newsItem.title!=='......' && newsDate.length">
 			<i class="iconfont icon-time"></i><span class="date">{{newsDate | formatTime}}</span>
 		</div>
 	</div>
@@ -70,7 +70,7 @@
 			}
 			.iconfont{
 				display: inline-block;
-				margin-right: 2px;
+				margin-right: 4px;
 				font-size: 18px;
 				height: 25px;
 				line-height: 25px;
@@ -93,7 +93,6 @@
 			},
 			newsDate: {
 				type: String,
-				require: true,
 				default: ''
 			}
 		},
@@ -115,7 +114,7 @@
 				$('#' + id + ' .progress').css('opacity','1')
 			},
 			formatedUrl(val){
-				if(val.length <= 0) return ''
+				if(!val || val.length <= 0) return ''
 				if(typeof(val)==='string')
 					return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 				else 

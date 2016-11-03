@@ -31,6 +31,10 @@ let routes = [
 			{
 				path: 'article/:id',
 				component: require('./components/articleDetail.vue')
+			},
+			{
+				path: 'theme/:id',
+				component: require('./views/mainPage.vue')
 			}
 		]
 	}

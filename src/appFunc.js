@@ -4,6 +4,7 @@ let changeUrl = function(val){
 }
 
 let setImgUrl = function(str){
+	if(!str) return '文章内容加载失败，请按F5刷新重试'
 	//全局替换文章内容图片src属性链接
 	let re = /(src=\")\S*\"/g //匹配src字符串
 	let newStr = str.replace(re,function(data){

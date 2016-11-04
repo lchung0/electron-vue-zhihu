@@ -154,8 +154,7 @@
 				})
 			},
 			closeDetail(id){
-				this.$router.push('/main')
-				location.reload()
+				this.$router.push({path: '/main'})
 			}
 		},
 		components: {

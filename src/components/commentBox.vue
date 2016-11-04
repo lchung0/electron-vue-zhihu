@@ -48,6 +48,9 @@
 				color: #858585
 			}
 		}
+		.content{
+			word-break: break-all;
+		}
 		.bottom-box{
 			width: 100%;
 			text-align: right;

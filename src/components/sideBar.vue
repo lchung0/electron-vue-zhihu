@@ -10,6 +10,12 @@
 			</div>
 			<div class="menu-list">
 				<ul>
+					<li>
+						<i class="circle-icon"></i>
+						<a class="menu-item waves-effect waves-light" @click="backToIndex">
+							首页
+						</a>
+					</li>
 				    <li v-for="(item,index) in menuList">
 				    	<i class="circle-icon"></i>
 						<a class="menu-item waves-effect waves-light" href="javascript:;"
@@ -49,6 +55,7 @@
 			height: 100%;
 			transition: all .5s ease-in-out;
 			background: #212121;
+			overflow: auto;
 			&.go-left{
 				transform: translateX(-400px);
 			}
@@ -124,9 +131,13 @@
 			}
 		},
 		methods:{
+			backToIndex(){
+				this.$router.push({path: '/main'})
+				location.reload()
+			},
 			getThemeData(id){
-				console.log(id)
-				this.$router.push('theme/' + id)
+				this.$router.push({path: '/theme/' + id})
+				location.reload()
 			}
 		}
 	}

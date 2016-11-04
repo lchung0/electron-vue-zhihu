@@ -72,7 +72,6 @@
 						},
 						success: data => {
 							this.newsList = data.stories.slice(1,data.stories.length)
-							console.log(data)
 							this.loading = false
 						}
 					})
@@ -99,7 +98,9 @@
 					success: data => {
 						if(!data) return
 						this.detailData = data
-						this.$router.push('/article/' + id)
+						this.$router.push({
+							path: '/article/' + id
+						})
 					}
 				})
 			}

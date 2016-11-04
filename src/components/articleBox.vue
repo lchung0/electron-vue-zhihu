@@ -7,7 +7,7 @@
 	     	<div class="indeterminate"></div>
 	  	</div>
 		<div class="img-box" v-show="newsItem.images && newsItem.images.length">
-			<img :src="formatedUrl(newsItem.images)" alt="">
+			<img :src="newsItem.images" alt="">
 		</div>
 		<div class="bottom-box" v-show="newsItem.title!=='......' && newsDate.length">
 			<i class="iconfont icon-time"></i><span class="date">{{newsDate | formatTime}}</span>
@@ -112,13 +112,6 @@
 		methods: {
 			showDetail(id){
 				$('#' + id + ' .progress').css('opacity','1')
-			},
-			formatedUrl(val){
-				if(!val || val.length <= 0) return ''
-				if(typeof(val)==='string')
-					return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
-				else 
-					return val[0].replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 			}
 		},
 		filters: {

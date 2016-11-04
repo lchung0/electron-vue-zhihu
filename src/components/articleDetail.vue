@@ -126,7 +126,6 @@
 		},
 		mounted(){
 			$('img').length > 1 && this.animateImg()
-			$('.detail-container img').length && this.setImgUrl()
 		},
 		methods: {
 			animateImg(){
@@ -138,15 +137,6 @@
 					})
 				})
 			},
-			setImgUrl(str){
-				let re = /(src=\")\S*\"/g //匹配src字符串
-				let that = this
-				let newStr = str.replace(re,function(data){
-					let targetStr = data.split('\"')
-					return "src=\"" + that.changeUrl(targetStr[1]) + "\""
-				})
-				return newStr
-			},
 			getNewsDetail(id){
 				$.ajax({
 					url: 'http://localhost:3333/getNewsDetail',
@@ -154,12 +144,7 @@
 					data: {'id': id},
 					dataType: 'json',
 					success: data => {
-						for(let i = 0,len = data.extra.comments.length;i < len ;i++){
-							data.extra.comments[i].avatar = this.changeUrl(data.extra.comments[i].avatar)
-						}
-						data.extra.image = this.changeUrl(data.extra.image)
 						this.totalData = data
-						this.contentData = this.setImgUrl(data.body)
 						setTimeout(_ =>{
 							//设置图片居中...
 							$('.content-image').parent().css('text-align','center')
@@ -171,10 +156,6 @@
 			closeDetail(id){
 				this.$router.push('/main')
 				location.reload()
-			},
-			changeUrl(val){ 
-				//解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html
-				return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 			}
 		},
 		components: {

@@ -58,10 +58,10 @@
 		},
 		mounted(){
 			this.$nextTick(_ => {
-				if(!this.extraData.length)
-				this.extraData.comments.push({
-					content: '暂无评论信息',
-				})
+				if(!this.extraData.comments.length)
+					this.extraData.comments.push({
+						content: '暂无评论信息',
+					})
 			})
 		},
 		components: {

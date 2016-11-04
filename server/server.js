@@ -1,9 +1,10 @@
-var path = require('path')
-var express = require('express')
-var request = require('request')
-var fs = require('fs')
+const path = require('path')
+const express = require('express')
+const request = require('request')
+const fs = require('fs')
+const app = express()
 
-var app = express()
+const {setImgUrl,changeUrl} = require('../src/appFunc.js')
 
 app.use(function(req, res, next) {
     res.set({
@@ -20,6 +21,7 @@ var imgUrl = 'http://news-at.zhihu.com/api/4/start-image/1080*1776',
 	menuUrl = 'http://news-at.zhihu.com/api/4/themes',
 	themeDetail = 'http://news-at.zhihu.com/api/4/theme/'
 
+//获取首屏图像
 app.get('/getImage',(req,res) => {
 	request.get(imgUrl,(err,responce) => {
 		
@@ -45,13 +47,18 @@ app.get('/getImage',(req,res) => {
 	})
 })
 
+//获取首页最新文章列表
 app.get('/getNews',(req,res) => {
 	request.get(newsUrl,(err,responce) => {
 		//date: 时间，stories:[{title,id,images:{}}]
-		res.send(responce.body)
+		let data = JSON.parse(responce.body)
+		for(let i = 0, len = data.stories.length; i < len; i++){
+			data.stories[i].images[0] = changeUrl(data.stories[i].images[0])
+		}
+		res.send(data)
 	})
 })
-
+//获取文章详情
 app.get('/getNewsDetail',(req,res) => {
 	let detailId = req.query.id 
 	let data = {} //整合需要返回的内容
@@ -59,31 +66,49 @@ app.get('/getNewsDetail',(req,res) => {
 	request.get(detailUrl+detailId, (err,responce) => {
 		request.get(detailUrl + detailId + '/short-comments',(err2,responce2) => {
 			request.get(extraDetail + detailId, (err3,responce3) => {
-				let extra = {
-					popularity: JSON.parse(responce3.body).popularity,
-					short_comments: JSON.parse(responce3.body).short_comments,
-					title: JSON.parse(responce.body).title,
-					image: JSON.parse(responce.body).image,
-					comments : JSON.parse(responce2.body).comments
+				let result = JSON.parse(responce.body),
+					result2 = JSON.parse(responce2.body),
+					result3 = JSON.parse(responce3.body)
+
+				for(let i = 0,len = result2.comments.length; i < len; i++){
+					result2.comments[i].avatar = changeUrl(result2.comments[i].avatar)
 				}
-				data.body = JSON.parse(responce.body).body
+				let extra = {
+					popularity: result3.popularity,
+					short_comments: result3.short_comments,
+					title: result.title,
+					image: result.image ? changeUrl(result.image) : '',
+					comments : result2.comments
+				}
+				data.body = setImgUrl(JSON.parse(responce.body).body)
 				data.extra = extra
 				res.send(data)
 			})
 		})
 	})
 })
-
+//获取主题列表
 app.get('/getMenu', (req,res) => {
 	request.get(menuUrl, (err,responce) => {
 		res.send(responce.body)
 	})
 })
-
+//获取主题文章列表
 app.get('/getThemeDetail',(req,res) => {
 	let themeId = req.query.id
 	request.get(themeDetail + themeId,(err,responce) => {
-		res.send(JSON.parse(responce.body))
+		let data = JSON.parse(responce.body)
+		data.background = changeUrl(data.background)
+		data.image = changeUrl(data.image)
+		for(let i = 0,len = data.editors.length;i < len;i++){
+			data.editors[i].avatar = changeUrl(data.editors[i].avatar)
+		}
+		for(let i = 0,len = data.stories.length;i < len;i++){
+			if(data.stories[i].images){
+				data.stories[i].images[0] = changeUrl(data.stories[i].images[0])
+			}
+		}
+		res.send(data)
 	})
 })
 

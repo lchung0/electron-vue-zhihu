@@ -79,10 +79,10 @@
 				}else{
 				    newsUrl = 'http://localhost:3333/getNews'
 				    $.get(newsUrl,data => {
-						this.newsDate = JSON.parse(data).date
-						this.newsList = JSON.parse(data).stories
+						this.newsDate = data.date
+						this.newsList = data.stories
 						this.newsList.push({'title': '......','images':[]})
-						this.imgList = JSON.parse(data).top_stories
+						this.imgList = data.top_stories
 						this.loading = false
 					})
 				}
@@ -90,19 +90,6 @@
 			})
 		},
 		methods:{
-			setImgUrl(str){
-				if(!str) {
-					alert('setImgUrl str 为空')
-					return ''
-				}
-				let re = /(src=\")\S*\"/g //匹配src字符串
-				let that = this
-				let newStr = str.replace(re,function(data){
-					let targetStr = data.split('\"')
-					return "src=\"" + that.changeUrl(targetStr[1]) + "\""
-				})
-				return newStr
-			},
 			showDetail(id){
 				$.ajax({
 					url: 'http://localhost:3333/getNewsDetail',
@@ -111,19 +98,10 @@
 					dataType: 'json',
 					success: data => {
 						if(!data) return
-						data.body = this.setImgUrl(data.body)
-						for(let i = 0,len = data.extra.comments.length;i < len ;i++){
-							data.extra.comments[i].avatar = this.changeUrl(data.extra.comments[i].avatar)
-						}
-						data.extra.image && (data.extra.image = this.changeUrl(data.extra.image))
 						this.detailData = data
 						this.$router.push('/article/' + id)
 					}
 				})
-			},
-			changeUrl(val){ 
-				//解决盗链问题，参考http://www.yatessss.com/2016/07/08/使用vue完成知乎日报.html
-				return val.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
 			}
 		},
 		components: {

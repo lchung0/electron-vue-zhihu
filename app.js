@@ -12,7 +12,8 @@ function createWindow(){
 	win = new BrowserWindow({
 		frame: false,
 		width: 1300,
-		height: 800
+		height: 800,
+		icon: './static/images/loading.gif'
 	})
 
 	win.loadURL('http://localhost:8080/#/main') //生产环境

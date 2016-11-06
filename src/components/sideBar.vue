@@ -3,7 +3,7 @@
 		<a class="menu-btn btn-floating waves-effect waves-light black" @click="isShowMenu=!isShowMenu"><i class="menu-icon iconfont" :class="{'icon-nav': isShowMenu === false,'icon-close': isShowMenu === true}"></i></a>
 		<div class="content" :class="{'go-left': !isShowMenu}">
 			<div class="avatar-box">
-				<img class="avatar" src="../../static/images/avatar.jpg" alt="头像">
+				<img class="avatar" src="../assets/images/avatar.jpg" alt="头像">
 				<div class="btn-group">
 					<button class="login-btn btn waves-effect waves-light green">登录</button>
 				</div>

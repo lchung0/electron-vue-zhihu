@@ -58,6 +58,7 @@
 		},
 		mounted(){
 			this.$nextTick(_ => {
+				!this.extraData.comments && (this.extraData.comments = [])
 				if(!this.extraData.comments.length)
 					this.extraData.comments.push({
 						content: '暂无评论信息',

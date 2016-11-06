@@ -145,6 +145,7 @@
 					dataType: 'json',
 					success: data => {
 						this.totalData = data
+						this.contentData = data.body
 						setTimeout(_ =>{
 							//设置图片居中...
 							$('.content-image').parent().css('text-align','center')

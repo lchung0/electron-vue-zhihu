@@ -53,6 +53,7 @@
                     let otherData = 'Mitko_Pigoff'
                     that.isLoading = false
                     that.fileUrl = './static/images/' + data + '.png'
+                    console.log(this.fileUrl)
                 })
                 $.get(menuUrl, data => {
                     that.menuList = JSON.parse(data).others

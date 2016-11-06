@@ -10,10 +10,9 @@ function createWindow(){
 	//express
 	express()
 	win = new BrowserWindow({
-		frame: false,
-		width: 1300,
-		height: 800,
-		icon: './static/images/loading.gif'
+		frame: true,
+		width: 1200,
+		height: 700
 	})
 
 	win.loadURL('http://localhost:8080/#/main') //生产环境

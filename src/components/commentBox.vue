@@ -3,7 +3,7 @@
 		<div class="header-box" v-show="commentData.avatar">
 			<img :src="commentData.avatar">
 			<span class="author">{{commentData.author}}</span>
-			<span class="time">{{commentData.time}}</span>
+			<span class="time">{{formatTime}}</span>
 		</div>
 		<div class="content">
 			{{commentData.content}}
@@ -66,6 +66,14 @@
 				default(){
 					return {}
 				}
+			}
+		},
+		computed: {
+			formatTime(){
+				//接口返回的时间少了几个数字，经过尝试，在后面加3个0，得到的结果比较准确
+				let time = parseInt(this.commentData.time + '000',10)
+				let result = new Date(time)
+				return result.toLocaleString()
 			}
 		}
 	}

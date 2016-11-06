@@ -17,7 +17,7 @@ var imgUrl = 'http://news-at.zhihu.com/api/4/start-image/1080*1776',
 	newsUrl = 'http://news-at.zhihu.com/api/4/news/latest',
 	detailUrl = 'http://news-at.zhihu.com/api/4/news/',
 	extraDetail = 'http://news-at.zhihu.com/api/4/story-extra/',
-	//shortCommentUrl = detailUrl + id + short-comments
+	//shortCommentUrl = detailUrl + id + short-comments //长评论则为long-comments
 	menuUrl = 'http://news-at.zhihu.com/api/4/themes',
 	themeDetail = 'http://news-at.zhihu.com/api/4/theme/'
 
@@ -26,10 +26,10 @@ app.get('/getImage',(req,res) => {
 	request.get(imgUrl,(err,responce) => {
 		
 		var fName = JSON.parse(responce.body).text
-		fName = fName.replace(' ','_')
-
+		fName = fName.replace(/\s/g,'_')
+		fName = fName.replace(/\"/g,'')
+		console.log(fName)
 		fs.exists('./static/images/' + fName + '.png', exists => {
-
 			if(!exists){ //判断图片是否已经保存过
 				request(JSON.parse(responce.body).img)
 					.pipe(fs.createWriteStream('./static/images/' + fName + '.png'))

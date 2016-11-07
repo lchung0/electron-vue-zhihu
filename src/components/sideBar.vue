@@ -100,6 +100,7 @@
 				transition: all .5s;
 			}
 			.menu-item{
+				position: relative;
 				display: inline-block;
 				margin-top: 10px;
 				padding: 5px;
@@ -107,10 +108,23 @@
 				height: 40px;
 				color: #fff;
 				font-size: 18px;
-				border-bottom: 1px solid transparent;
 				transition: all .5s;
 				&:hover{
-					border-bottom: 1px solid #eee;
+					&:after{
+						height: 2px;
+						transform: scale(1);
+					}
+				}
+				&:after{
+					content: '';
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 100%;
+					height: 0;
+					background: #eee;
+					transform: scale(0);
+					transition: all .3s;
 				}
 			}
 		}

@@ -116,7 +116,11 @@
 			//接收事件需在发送事件前面，否则接收不了
 			eventHandler.$on('sendNewsData', totalData => {
 				this.totalData = totalData
-				this.contentData = totalData.body				
+				this.contentData = totalData.body
+				setTimeout(_ =>{
+					//设置图片居中...
+					$('.content-image').parent().css('text-align','center')
+				},50)
 			})
 			eventHandler.$emit('getNewsDetail')
 			//如果直接在页面点击刷新，则根据路由id重新获取内容

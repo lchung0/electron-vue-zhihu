@@ -57,18 +57,24 @@
 			eventHandler.$on('getNewsDetail',_ => {
 				eventHandler.$emit('sendNewsData',this.detailData)
 			})
+			eventHandler.$on('changeMainPage',_ =>{
+				this.getData()
+			})
 		},
 		mounted(){
-			this.$nextTick(_ => {
-				let newsUrl = ''
 				this.loading = true
+				this.getData()
+		},
+		methods:{
+			getData(){
+				let newsUrl = ''
 				if(this.$route.fullPath.indexOf('theme') >= 0){
 					newsUrl = 'http://localhost:3333/getThemeDetail'
 					$.ajax({
 						url: newsUrl,
 						type: 'get',
 						data: {
-							id: this.$route.params.id
+							id: this.$route.params.theme_id
 						},
 						success: data => {
 							this.newsList = data.stories.slice(1,data.stories.length)
@@ -85,10 +91,7 @@
 						this.loading = false
 					})
 				}
-				
-			})
-		},
-		methods:{
+			},
 			showDetail(id){
 				$.ajax({
 					url: 'http://localhost:3333/getNewsDetail',

@@ -22,18 +22,19 @@ let routes = [
 	{
 		path: '/',
 		component: require('./App.vue'),
-		redirect: '/main',
 		children: [
 			{
 				path: '/main',
 				component: require('./views/mainPage.vue'),
 			},
 			{
-				path: '/article/:id',
+				path: '/article/:article_id',
+				name: 'article',
 				component: require('./components/articleDetail.vue')
 			},
 			{
-				path: '/theme/:id',
+				path: '/theme/:theme_id',
+				name: 'theme',
 				component: require('./views/mainPage.vue')
 			}
 		]
@@ -43,8 +44,8 @@ let routes = [
 let router = new vueRouter({
 	routes: routes
 })
-
 router.beforeEach((to,from,next) => {
+	console.log(to.fullPath)
 	next()
 })
 

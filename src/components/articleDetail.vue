@@ -121,7 +121,7 @@
 			eventHandler.$emit('getNewsDetail')
 			//如果直接在页面点击刷新，则根据路由id重新获取内容
 			if(!this.contentData) 
-				this.getNewsDetail(this.$route.params.id)
+				this.getNewsDetail(this.$route.params.article_id)
 
 		},
 		mounted(){

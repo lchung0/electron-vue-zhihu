@@ -133,11 +133,11 @@
 		methods:{
 			backToIndex(){
 				this.$router.push({path: '/main'})
-				location.reload()
+				eventHandler.$emit('changeMainPage')
 			},
 			getThemeData(id){
 				this.$router.push({path: '/theme/' + id})
-				location.reload()
+				eventHandler.$emit('changeMainPage')
 			}
 		}
 	}

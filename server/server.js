@@ -2,9 +2,9 @@ const path = require('path')
 const express = require('express')
 const request = require('request')
 const fs = require('fs')
-const app = express()
-
 const {setImgUrl,changeUrl} = require('../src/appFunc.js')
+
+const app = express()
 
 app.use(function(req, res, next) {
     res.set({
@@ -28,7 +28,6 @@ app.get('/getImage',(req,res) => {
 		var fName = JSON.parse(responce.body).text
 		fName = fName.replace(/\s/g,'_')
 		fName = fName.replace(/\"/g,'')
-		console.log(fName)
 		fs.exists('./static/images/' + fName + '.png', exists => {
 			if(!exists){ //判断图片是否已经保存过
 				request(JSON.parse(responce.body).img)

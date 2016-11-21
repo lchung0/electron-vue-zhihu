@@ -1,7 +1,10 @@
 <template>
 	<div class="container">
 		<a class="menu-btn btn-floating waves-effect waves-light black" @click="isShowMenu=!isShowMenu"><i class="menu-icon iconfont" :class="{'icon-nav': isShowMenu === false,'icon-close': isShowMenu === true}"></i></a>
-		<div class="content" :class="{'go-left': !isShowMenu}">
+		<div id="js_content" class="content" :class="{'go-left': !isShowMenu}">
+			<div class="canvas-box" style="position:absolute;z-index:0;width:100%;height:99%;overflow:hidden;">
+				<canvasBg></canvasBg>
+			</div>
 			<div class="avatar-box">
 				<img class="avatar" src="../assets/images/avatar.jpg" alt="头像">
 				<div class="btn-group">
@@ -153,6 +156,9 @@
 				this.$router.push({path: '/theme/' + id})
 				eventHandler.$emit('changeMainPage')
 			}
+		},
+		components: {
+			canvasBg: require('./canvasBg.vue')
 		}
 	}
 </script>

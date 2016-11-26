@@ -111,9 +111,13 @@ app.get('/getThemeDetail',(req,res) => {
 	})
 })
 
-module.exports = function(){
-	app.listen(3333,_ => {
-		console.log("node is listening at port 3333")
-	})
-}
+app.listen(3333,_ => {
+	console.log("node is listen at port 3333")
+})
+
+// module.exports = function(){
+// 	app.listen(3333,_ => {
+// 		console.log("node is listening at port 3333")
+// 	})
+// }
 
